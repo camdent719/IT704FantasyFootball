@@ -1,4 +1,11 @@
-var FantasySports = require('FantasySports');
+var http = require('http');
+
+http.createServer(function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.end('Hello World!');
+}).listen(8080);
+
+/*var FantasySports = require('FantasySports');
 FantasySports.options({
   "accessTokenUrl": "https://api.login.yahoo.com/oauth/v2/get_request_token",
   "requestTokenUrl": "https://api.login.yahoo.com/oauth/v2/get_token",
@@ -38,4 +45,4 @@ exports.myTeams = function(req, res) {
 
           res.json(leagues);
       });
-};
+}; */
