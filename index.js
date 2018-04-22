@@ -16,7 +16,7 @@ FantasySports.options({
   "version": "1.0",
   "callback": "http://fantasyfootballdashboard-fantasyfootballdashboard.193b.starter-ca-central-1.openshiftapps.com/",
   "encryption": "HMAC-SHA1"
-};);
+};
 
 exports.oauth = function(req, res) {
   FantasySports.startAuth(req, res);
