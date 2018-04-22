@@ -5,6 +5,7 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "connect": "^3.6.6",
     "express": "^4.16.3",
     "fantasysports": "^0.3.0"
   }
