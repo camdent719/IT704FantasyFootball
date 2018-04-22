@@ -7,7 +7,7 @@ var app = express();
     res.end('Hello World!');
 }).listen(8080);*/
 
-var FantasySports = require('FantasySports');
+var FantasySports = require('fantasysports');
 FantasySports.options({
   "accessTokenUrl": "https://api.login.yahoo.com/oauth/v2/get_request_token",
   "requestTokenUrl": "https://api.login.yahoo.com/oauth/v2/get_token",
