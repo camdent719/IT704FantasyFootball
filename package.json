@@ -2,6 +2,9 @@
   "name": "fantasyfootballdashboard",
   "version": "0.0.1",
   "scripts": {
-     "start": "node index.js"
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
   }
 }
