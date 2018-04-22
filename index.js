@@ -14,7 +14,7 @@ FantasySports.options({
   "oauthKey": process.env.OAUTHKEY,
   "oauthSecret": process.env.OAUTHSECRET,
   "version": "1.0",
-  "callback": "http://it704s.wcit.cs.unh.edu/auth/oauth/callback",
+  "callback": "http://fantasyfootballdashboard-fantasyfootballdashboard.193b.starter-ca-central-1.openshiftapps.com/",
   "encryption": "HMAC-SHA1"
 };);
 
