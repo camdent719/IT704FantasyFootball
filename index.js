@@ -1,5 +1,6 @@
 var http = require('http');
 var express = require('express');
+var cookieSession = require('cookie-session');
 var app = express();
 
 /*http.createServer(function (req, res) {
