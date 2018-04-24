@@ -8,6 +8,7 @@ var app = express();
 }).listen(8080);*/
 
 var FantasySports = require('fantasysports');
+var router = express.Router();
 
 FantasySports.options({
   "accessTokenUrl": "https://api.login.yahoo.com/oauth/v2/get_request_token",
@@ -18,6 +19,10 @@ FantasySports.options({
   "callback": "http://fantasyfootballdashboard-fantasyfootballdashboard.193b.starter-ca-central-1.openshiftapps.com/",
   "encryption": "HMAC-SHA1"
 });
+
+//router.get('/authors', author_controller.author_list);
+app.get("/auth/oauth");
+app.get("/auth/oauth/callback")
 
 exports.oauth = function(req, res) {
   FantasySports.startAuth(req, res);
