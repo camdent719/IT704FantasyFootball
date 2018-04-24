@@ -34,8 +34,8 @@ exports.authorize = function(req, res) {
 };
 
 app.use(express.cookieSession({ 
-  key: 'some key', 
-  secret: 'some secret', 
+  key: 'dj0yJmk9dEpvVlZxeWp5RUt1JmQ9WVdrOU4wMUJaRUpUTlRBbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD1hNw--', 
+  secret: '87e5a6384522209bc709c00f6007a3047c7a8a95', 
   proxy: true 
 }));
 
