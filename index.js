@@ -1,4 +1,5 @@
 //"^4.16.3",
+//"fantasysports": "^0.3.0"
 
 var http = require('http');
 var express = require('express');
