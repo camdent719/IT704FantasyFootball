@@ -1,17 +1,13 @@
-//"^4.16.3",
-//"fantasysports": "^0.3.0"
-
 var http = require('http');
 var express = require('express');
 var app = express();
-console.log("http, express, and app lines have executed");
+
 /*http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.end('Hello World!');
 }).listen(8080);*/
 
 var FantasySports = require('fantasysports');
-console.log("require fantasysports has executed");
 
 FantasySports.options({
   "accessTokenUrl": "https://api.login.yahoo.com/oauth/v2/get_request_token",
@@ -22,8 +18,6 @@ FantasySports.options({
   "callback": "http://fantasyfootballdashboard-fantasyfootballdashboard.193b.starter-ca-central-1.openshiftapps.com/",
   "encryption": "HMAC-SHA1"
 });
-
-console.log("fantasysports options has executed");
 
 exports.oauth = function(req, res) {
   FantasySports.startAuth(req, res);
