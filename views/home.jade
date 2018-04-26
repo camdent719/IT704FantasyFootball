@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  if user
+    .bs-docs-header
+      .container
+        h1 Test Yahoo OAuth 2.0
+        p Using YahooFantasy module.
+
+  .container
+    if user
+      h3 Access Token
+      div.long-text #{user}
+      if data
+        h3 user.games data
+        div.long-text #{data}
+    else
+      .lead Please sign-in to view user.games information.
