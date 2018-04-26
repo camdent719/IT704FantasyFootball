@@ -87,6 +87,8 @@ app.get('/auth/yahoo/callback', function(req, res) {
 
       req.session.token = accessToken;
 
+      var gameID = 0;
+      
       yf.setUserToken(accessToken);
       yf.user.games(
         function(err, data) {
@@ -94,8 +96,10 @@ app.get('/auth/yahoo/callback', function(req, res) {
             console.log(err);
           else
             req.session.result = data;
-          
-           return res.redirect('/');
+            //gameID = JSON.parse(data);
+            gameID = data.game_id;
+            console.log(gameID);
+          return res.redirect('/');
         }
       );      
     }
