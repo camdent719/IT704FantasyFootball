@@ -88,10 +88,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
       req.session.token = accessToken;
 
       yf.setUserToken(accessToken);
-      //yf.user.games(
-      yf.league.scoreboard(
-        league_key,
-        week, // optional 
+      yf.user.games(
         function(err, data) {
           if (err)
             console.log(err);
