@@ -38,7 +38,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function(req, res) {
   var data;
   if (req.session.result)
+    gameID = data.game_id; //
+    console.log(gameID); //
     data = JSON.stringify(req.session.result, null, 2);
+    data += "\n\nGame ID: " + gameID;
   
   res.render('home', {
     title: 'Home',
@@ -86,8 +89,6 @@ app.get('/auth/yahoo/callback', function(req, res) {
       //var refreshToken = body.refresh_token;
 
       req.session.token = accessToken;
-
-      var gameID = 0;
       
       yf.setUserToken(accessToken);
       yf.user.games(
@@ -96,9 +97,6 @@ app.get('/auth/yahoo/callback', function(req, res) {
             console.log(err);
           else
             req.session.result = data;
-            //gameID = JSON.parse(data);
-            gameID = data.game_id;
-            console.log(gameID);
           return res.redirect('/');
         }
       );      
