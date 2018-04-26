@@ -18,7 +18,7 @@ var YantasySports = require('yahoo-fantasy-without-auth');
 
 var clientId = process.env.APP_CLIENT_ID || require('./conf.js').APP_CLIENT_ID;
 var clientSecret = process.env.APP_CLIENT_SECRET || require('./conf.js').APP_CLIENT_SECRET;
-var redirectUri = process.env.APP_REDIRECT_URI || 'http://myapp.com/auth/yahoo/callback';
+var redirectUri = process.env.APP_REDIRECT_URI || 'http://it704.herokuapp.oom';//'http://myapp.com/auth/yahoo/callback';
 
 var yf = new YantasySports();
 
