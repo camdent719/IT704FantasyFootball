@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function(req, res) {
   var data;
   if (req.session.result)
-    gameID = data.game_id; //
+    var gameID = data.game_id; //
     console.log(gameID); //
     data = JSON.stringify(req.session.result, null, 2);
     data += "\n\nGame ID: " + gameID;
