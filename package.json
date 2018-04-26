@@ -1,12 +1,31 @@
 {
-  "name": "fantasyfootballdashboard",
-  "version": "0.0.1",
+  "name": "yahoo-oauth2-test",
+  "version": "1.0.0",
+  "description": "NodeJS sample application for Yahoo OAuth 2.0 + yfsapi-without-auth",
+  "engines": {
+    "node": "5.10.1"
+  },
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "dependencies": {
-    "connect": "^3.6.6",
-    "express": "^3.21.2",
-    "fantasysports": "0.3.0"
-  }
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-session": "^1.14.1",
+    "jade": "^1.11.0",
+    "request": "^2.75.0",
+    "yahoo-fantasy-without-auth": "^1.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/withsmilo/yfsapi-oauth2-sample-app.git"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "yahooFantasy",
+    "yfsapi"
+  ],
+  "license": "MIT"
 }
