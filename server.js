@@ -40,6 +40,9 @@ app.get('/', function(req, res) {
   if (req.session.result)
     data = JSON.stringify(req.session.result, null, 2);
   
+  console.log("Type of req:  " + typeof req.session.result);
+  console.log("Type of data: " + typeof data);
+  
   res.render('home', {
     title: 'Home',
     user: req.session.token,
