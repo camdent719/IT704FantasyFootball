@@ -145,8 +145,8 @@ app.get('/auth/yahoo/callback', function(req, res) {
           return res.redirect('/');
         }
       );
-      /*
-      yf.roster.players(
+      
+      /*yf.roster.players(
         team_key,
         function(err, data) {
           if (err)
@@ -156,7 +156,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
           }
           return res.redirect('/');
         }
-      );*/)
+      );*/
     }
   });
 });
