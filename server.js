@@ -95,8 +95,10 @@ app.get('/auth/yahoo/callback', function(req, res) {
       var league_name;
       var num_teams;
       var league_key;
+      var league_id;
       var team_name;
       var team_key;
+      var team_id;
       
       yf.setUserToken(accessToken);
       yf.user.games(
@@ -121,6 +123,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
             league_name = req.session.result.leagues[0].leagues[0].name;
             num_teams = req.session.result.leagues[0].leagues[0].num_teams;
             league_key = req.session.result.leagues[0].leagues[0].league_key;
+            league_id = req.session.result.leagues[0].leagues[0].league_id;
           }
           //return res.redirect('/');
         }
@@ -135,13 +138,17 @@ app.get('/auth/yahoo/callback', function(req, res) {
             req.session.result = data;
             team_name = req.session.result.teams[0].teams[0].name;
             team_key = req.session.result.teams[0].teams[0].team_key;
+            team_id = req.session.result.teams[0].teams[0].team_id;
           }
           //return res.redirect('/');
         }
       );
       
+      console.log("Game key: " + game_key);
+      console.log("Team key: " + team_key);
+      
       yf.roster.players(
-        game_key,
+        team_key,
         //date, // optional 
         function(err, data) {
           if (err)
