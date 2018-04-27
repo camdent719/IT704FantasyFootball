@@ -136,7 +136,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
             console.log(err);
           else {
             req.session.result = data;
-            game_key = req.session.result.teams[0].game_key;
+            //game_key = req.session.result.teams[0].game_key;
             team_name = req.session.result.teams[0].teams[0].name;
             team_key = req.session.result.teams[0].teams[0].team_key;
             team_id = req.session.result.teams[0].teams[0].team_id;
