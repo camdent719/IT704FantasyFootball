@@ -148,7 +148,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
       );
       
       yf.roster.players(
-        "371.l.1075055.t.9",
+        game_key + ".l." + league_id + ".t." + team_id,
         function(err, data) {
           if (err)
             console.log(err);
