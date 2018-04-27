@@ -120,7 +120,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
             num_teams = req.session.result.leagues[0].leagues[0].num_teams;
             league_key = req.session.result.leagues[0].leagues[0].league_key;
           }
-          return res.redirect('/');
+          //return res.redirect('/');
         }
       );
       
