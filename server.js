@@ -143,7 +143,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
             
             req.session.result = "Game key: " + game_key + "\nTeam key: " + team_key + "\nLeague_id: " + league_id;
           }
-          //return res.redirect('/');
+          return res.redirect('/');
         }
       );
       
