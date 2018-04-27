@@ -108,12 +108,13 @@ app.get('/auth/yahoo/callback', function(req, res) {
           else {
             req.session.result = data;
             game_key = req.session.result.games[0].game_key;
+            console.log("Game key (in): " + game_key);
           }
           //return res.redirect('/');
         }
       );
       
-      console.log("Game key: " + game_key);
+      console.log("Game key (out): " + game_key);
       
       yf.user.game_leagues(
         game_key, 
