@@ -141,13 +141,13 @@ app.get('/auth/yahoo/callback', function(req, res) {
             team_key = req.session.result.teams[0].teams[0].team_key;
             team_id = req.session.result.teams[0].teams[0].team_id;
             
-            //req.session.result = "Game key: " + game_key + "\nTeam key: " + team_key + "\nLeague_id: " + league_id;
+            req.session.result = "Game key: " + game_key + "\nTeam key: " + team_key + "\nLeague_id: " + league_id;
           }
           //return res.redirect('/');
         }
       );
       
-      yf.roster.players(
+      /*yf.roster.players(
         team_key,
         function(err, data) {
           if (err)
@@ -157,7 +157,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
           }
           return res.redirect('/');
         }
-      );
+      );*/
     }
   });
 });
