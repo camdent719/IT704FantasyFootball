@@ -142,12 +142,13 @@ app.get('/auth/yahoo/callback', function(req, res) {
             team_key = req.session.result.teams[0].teams[0].team_key;
             team_id = req.session.result.teams[0].teams[0].team_id;
           }
-          //return res.redirect('/');
+          return res.redirect('/');
         }
       );
     
-      console.log("Team key: " + team_key);
+      //console.log("Team key: " + team_key);
       
+      /*
       yf.roster.players(
         team_key,
         //date, // optional 
@@ -160,7 +161,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
           return res.redirect('/');
         }
       );
-      
+      */
     }
   });
 });
