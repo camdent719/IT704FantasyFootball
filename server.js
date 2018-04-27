@@ -40,8 +40,8 @@ app.get('/', function(req, res) {
   if (req.session.result)
     data = JSON.stringify(req.session.result, null, 2);
   
-  console.log("Type of req:  " + typeof req.session.result);
-  console.log("Type of data: " + typeof data);
+  var game_id = req.session.result.game_id;
+  console.log("game_id: " + game_id);
   
   res.render('home', {
     title: 'Home',
