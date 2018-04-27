@@ -148,7 +148,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
       );
       
       yf.roster.players(
-        team_key,
+        "371.l.1075055.t.9",
         function(err, data) {
           if (err)
             console.log(err);
