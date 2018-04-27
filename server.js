@@ -124,7 +124,6 @@ app.get('/auth/yahoo/callback', function(req, res) {
             num_teams = req.session.result.leagues[0].leagues[0].num_teams;
             league_key = req.session.result.leagues[0].leagues[0].league_key;
             league_id = req.session.result.leagues[0].leagues[0].league_id;
-            console.log("league_id: " + league_id);
           }
           //return res.redirect('/');
         }
@@ -140,15 +139,15 @@ app.get('/auth/yahoo/callback', function(req, res) {
             team_name = req.session.result.teams[0].teams[0].name;
             team_key = req.session.result.teams[0].teams[0].team_key;
             team_id = req.session.result.teams[0].teams[0].team_id;
-            console.log("team_key: " + team_key);
-            console.log("team_id: " + team_id);
+            
+            req.session.result = "Game key: " + game_key + "\nTeam key: " + team_key + "\nLeague_id: " + league_id;
           }
-          //return res.redirect('/');
+          return res.redirect('/');
         }
       );
-      
+      /*
       yf.roster.players(
-        game_key + ".l." + league_id + ".t." + team_id,
+        team_key,
         function(err, data) {
           if (err)
             console.log(err);
@@ -157,7 +156,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
           }
           return res.redirect('/');
         }
-      );
+      );*/)
     }
   });
 });
