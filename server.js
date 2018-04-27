@@ -113,6 +113,8 @@ app.get('/auth/yahoo/callback', function(req, res) {
         }
       );
       
+      console.log("Game key: " + game_key);
+      
       yf.user.game_leagues(
         game_key, 
         function(err, data) {
@@ -143,8 +145,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
           //return res.redirect('/');
         }
       );
-      
-      console.log("Game key: " + game_key);
+    
       console.log("Team key: " + team_key);
       
       yf.roster.players(
