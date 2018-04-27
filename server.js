@@ -37,13 +37,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
   var data;
-  if (req.session.result)
+  var obj;
+  if (req.session.result) {
     data = JSON.stringify(req.session.result, null, 2);
-  
-  console.log(req.session.result);
-  
-  //var game_id = req.session.result.game_id;
-  //console.log("game_id: " + game_id);
+    obj = JSON.parse(data);
+    console.log("type of obj: " + typeof obj);
+    //var game_id = req.session.result.game_id;
+    //console.log("game_id: " + game_id);
+  }
   
   res.render('home', {
     title: 'Home',
