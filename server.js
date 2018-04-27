@@ -42,8 +42,8 @@ app.get('/', function(req, res) {
     data = JSON.stringify(req.session.result, null, 2);
     obj = JSON.parse(data);
     console.log("type of obj: " + typeof obj);
-    //var game_id = req.session.result.game_id;
-    //console.log("game_id: " + game_id);
+    var game_id = obj.games[0].game_id;
+    console.log("game_id: " + game_id);
   }
   
   res.render('home', {
