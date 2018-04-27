@@ -91,14 +91,22 @@ app.get('/auth/yahoo/callback', function(req, res) {
 
       req.session.token = accessToken;
       
-      var game_key;
+      /*var game_key;
       var league_name;
       var num_teams;
       var league_key;
       var league_id;
       var team_name;
       var team_key;
-      var team_id;
+      var team_id;*/
+      game_key = "";
+      league_name = "";
+      num_teams = 0;
+      league_key = "";
+      league_id = "";
+      team_name = "";
+      team_key = "";
+      team_id = "";
       
       yf.setUserToken(accessToken);
       yf.user.games(
