@@ -141,7 +141,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
       );
       
       yf.roster.players(
-        team_key,
+        game_key,
         //date, // optional 
         function(err, data) {
           if (err)
