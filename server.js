@@ -37,12 +37,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
   var data;
-  //var obj;
   if (req.session.result) {
-    data = JSON.stringify(req.session.result, null, 2);
-    //obj = JSON.parse(data);
-    var game_id = req.session.result.games[0].game_id;
-    console.log("game_id: " + game_id);
+    data = JSON.stringify(req.session.result, null, 2); // gets string rep. of data
+    
+    //var game_id = req.session.result.games[0].game_id;
+    //console.log("game_id: " + game_id);
   }
   
   res.render('home', {
@@ -92,16 +91,34 @@ app.get('/auth/yahoo/callback', function(req, res) {
 
       req.session.token = accessToken;
       
+      var game_id;
+      
       yf.setUserToken(accessToken);
       yf.user.games(
         function(err, data) {
           if (err)
             console.log(err);
-          else
+          else {
             req.session.result = data;
+            game_key = req.session.result.games[0].game_key;
+          }
+          //return res.redirect('/');
+        }
+      );
+      
+      yf.user.game_leagues(
+        game_key, 
+        function(err, data) {
+          if (err)
+            console.log(err);
+          else {
+            req.session.result = data;
+            //game_key = req.session.result.games[0].game_key;
+          }
           return res.redirect('/');
         }
-      );      
+      );
+      
     }
   });
 });
