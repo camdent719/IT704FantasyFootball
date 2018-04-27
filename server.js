@@ -91,22 +91,14 @@ app.get('/auth/yahoo/callback', function(req, res) {
 
       req.session.token = accessToken;
       
-      /*var game_key;
+      var game_key;
       var league_name;
       var num_teams;
       var league_key;
       var league_id;
       var team_name;
       var team_key;
-      var team_id;*/
-      game_key = "";
-      league_name = "";
-      num_teams = 0;
-      league_key = "";
-      league_id = "";
-      team_name = "";
-      team_key = "";
-      team_id = "";
+      var team_id;
       
       yf.setUserToken(accessToken);
       yf.user.games(
@@ -116,13 +108,10 @@ app.get('/auth/yahoo/callback', function(req, res) {
           else {
             req.session.result = data;
             game_key = req.session.result.games[0].game_key;
-            console.log("Game key (in): " + game_key);
           }
           //return res.redirect('/');
         }
       );
-      
-      console.log("Game key (out): " + game_key);
       
       yf.user.game_leagues(
         game_key, 
