@@ -190,15 +190,15 @@ app.get('/auth/yahoo/callback', function(req, res) {
                 var i = 0;
                 for (team in req.session.result.scoreboard.matchups[game].teams) { // traverse array of the 2 teams in the matchup
                   console.log(i);
-                  if (game.teams[team].name != fantasyData.team_name) { // if is the opponent
+                  if (req.session.result.scoreboard.matchups[game].teams[team].name != fantasyData.team_name) { // if is the opponent
                     console.log("--- it was the opponent");
-                    opponent_name = game.teams[team].name;
-                    opponent_score = game.teams[team].points.total;
-                    opponent_proj = game.teams[team].projected_points.total;
+                    opponent_name = req.session.result.scoreboard.matchups[game].teams[team].name;
+                    opponent_score = req.session.result.scoreboard.matchups[game].teams[team].points.total;
+                    opponent_proj = req.session.result.scoreboard.matchups[game].teams[team].projected_points.total;
                   } else { // else if is the logged-in user
                     console.log("--- it was me");
-                    user_score = game.teams[team].points.total;
-                    user_proj = game.teams[team].projected_points.total;
+                    user_score = req.session.result.scoreboard.matchups[game].teams[team].points.total;
+                    user_proj = req.session.result.scoreboard.matchups[game].teams[team].projected_points.total;
                   }
                   i++;
                 }
