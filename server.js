@@ -178,32 +178,28 @@ app.get('/auth/yahoo/callback', function(req, res) {
           if (err)
             console.log(err);
           else {
-            req.session.result = data;
+            //req.session.result = data;
             
             for (game in req.session.result.scoreboard.matchups) {
               if (req.session.result.scoreboard.matchups[game].teams[0].team_key != fantasyData.team_key && 
                   req.session.result.scoreboard.matchups[game].teams[1].team_key != fantasyData.team_key) {
-                console.log("continueeeeee");
-                continue;
-              } else {
+                continue; // if the user is not a part of this game, skip it
+              } else { // this game is one that the user is in
                 var opponent_name, opponent_score, opponent_proj, user_score, user_proj;
-                var i = 0;
-                for (team in req.session.result.scoreboard.matchups[game].teams) { // traverse array of the 2 teams in the matchup
-                  console.log(i);
+                
+                // traverse array of the 2 teams in the matchup
+                for (team in req.session.result.scoreboard.matchups[game].teams) { 
                   if (req.session.result.scoreboard.matchups[game].teams[team].name != fantasyData.team_name) { // if is the opponent
-                    console.log("--- it was the opponent");
                     opponent_name = req.session.result.scoreboard.matchups[game].teams[team].name;
                     opponent_score = req.session.result.scoreboard.matchups[game].teams[team].points.total;
                     opponent_proj = req.session.result.scoreboard.matchups[game].teams[team].projected_points.total;
-                  } else { // else if is the logged-in user
-                    console.log("--- it was me");
+                  } else { // else if is the user
                     user_score = req.session.result.scoreboard.matchups[game].teams[team].points.total;
                     user_proj = req.session.result.scoreboard.matchups[game].teams[team].projected_points.total;
                   }
-                  i++;
                 }
                 
-                var matchup = {
+                var matchup = { // create matchup obj with matchup info
                   "opponent_name": opponent_name,
                   "opponent_score": opponent_score,
                   "opponent_proj": opponent_proj,
@@ -211,11 +207,12 @@ app.get('/auth/yahoo/callback', function(req, res) {
                   "user_proj": user_proj
                 }
                 fantasyData["matchup"] = matchup;
-                break;
+                break; // user will only be in one game, so once we've found it we're done
               }
             }
             
             console.log(fantasyData);
+            req.session.result = fantasyData;
           }
           return res.redirect('/');
         }
