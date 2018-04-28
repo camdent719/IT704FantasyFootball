@@ -173,12 +173,41 @@ app.get('/auth/yahoo/callback', function(req, res) {
       // using the league key, get info about the current matchup (score, teams)
       yf.league.scoreboard(
         fantasyData.league_key,
-        14, // this is the last week that Camden had a game
+        15, // this is the last week that Camden had a game
         function(err, data) {
           if (err)
             console.log(err);
           else {
             req.session.result = data;
+            
+            for (game in req.session.result.scoreboard.matchups) {
+              if (game.teams[0].team_key != fantasyData.team_key && game.teams[1].team_key != fantasyData.team_key)
+                continue;
+              else {
+                var opponent_name, opponent_score, opponent_proj, user_score, user_proj;
+                for (team in game.teams) { // traverse array of the 2 teams in the matchup
+                  if (team.name != fantasyData.team_name) { // if is the opponent
+                    opponent_name = team.name;
+                    opponent_score = team.points.total;
+                    opponent_proj = team.projected_points.total;
+                  } else { // else if is the logged-in user
+                    user_score = team.points.total;
+                    user_proj = team.projected_points.total;
+                  }
+                }
+                
+                var currGame = {
+                  "opponent_name": opponent_name,
+                  "opponent_score": opponent_score,
+                  "opponent_proj": opponent_proj,
+                  "user_score": user_score,
+                  "user_proj": user_proj
+                }
+                fantasyData[matchup] = currGame;
+                break;
+              }
+            }
+            
             console.log(fantasyData);
           }
           return res.redirect('/');
