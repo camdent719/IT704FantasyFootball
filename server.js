@@ -100,6 +100,8 @@ app.get('/auth/yahoo/callback', function(req, res) {
       var team_key;
       var team_id;
       
+      console.log("fantasyData name (server.js): " + fantasyData.name);
+      
       yf.setUserToken(accessToken);
       yf.user.games(
         function(err, data) {
