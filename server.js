@@ -162,7 +162,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
             console.log(err);
           } else {
             req.session.result = data;
-            var roster = {};
+            var roster = [];
             for( player in req.session.result.roster) {
               var currPlayer = {
                 "name": req.session.result.roster[player].name.full,
