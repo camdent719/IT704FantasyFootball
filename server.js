@@ -182,9 +182,10 @@ app.get('/auth/yahoo/callback', function(req, res) {
             
             for (game in req.session.result.scoreboard.matchups) {
               if (req.session.result.scoreboard.matchups[game].teams[0].team_key != fantasyData.team_key && 
-                  req.session.result.scoreboard.matchups[game].teams[1].team_key != fantasyData.team_key)
+                  req.session.result.scoreboard.matchups[game].teams[1].team_key != fantasyData.team_key) {
+                console.log("continueeeeee");
                 continue;
-              else {
+              } else {
                 var opponent_name, opponent_score, opponent_proj, user_score, user_proj;
                 for (team in game.teams) { // traverse array of the 2 teams in the matchup
                   if (team.name != fantasyData.team_name) { // if is the opponent
