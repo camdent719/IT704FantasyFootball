@@ -181,7 +181,8 @@ app.get('/auth/yahoo/callback', function(req, res) {
             req.session.result = data;
             
             for (game in req.session.result.scoreboard.matchups) {
-              if (game.teams[0].team_key != fantasyData.team_key && game.teams[1].team_key != fantasyData.team_key)
+              if (req.session.result.scoreboard.matchups[game].teams[0].team_key != fantasyData.team_key && 
+                  req.session.result.scoreboard.matchups[game].teams[1].team_key != fantasyData.team_key)
                 continue;
               else {
                 var opponent_name, opponent_score, opponent_proj, user_score, user_proj;
@@ -196,14 +197,14 @@ app.get('/auth/yahoo/callback', function(req, res) {
                   }
                 }
                 
-                var currGame = {
+                var matchup = {
                   "opponent_name": opponent_name,
                   "opponent_score": opponent_score,
                   "opponent_proj": opponent_proj,
                   "user_score": user_score,
                   "user_proj": user_proj
                 }
-                fantasyData[matchup] = currGame;
+                fantasyData["matchup"] = matchup;
                 break;
               }
             }
