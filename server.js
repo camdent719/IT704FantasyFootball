@@ -163,13 +163,13 @@ app.get('/auth/yahoo/callback', function(req, res) {
           } else {
             req.session.result = data;
             var roster = [];
-            for( player in req.session.result.roster) {
+            for (player in req.session.result.roster) {
               var currPlayer = {
                 "name": req.session.result.roster[player].name.full,
                 "position": req.session.result.roster[player].display_position,
                 "team": req.session.result.roster[player].editorial_team_abbr
               }
-              roster.push(req.session.result.roster[player].name.full);
+              roster.push(currPlayer);
             }
             fantasyData["roster"] = roster;
             console.log(fantasyData);
