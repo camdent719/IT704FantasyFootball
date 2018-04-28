@@ -166,7 +166,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
           } else {
             req.session.result = data;
           }
-          return res.redirect('/');
+          //return res.redirect('/');
         }
       );
       yf.roster.players(
