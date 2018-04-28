@@ -21,12 +21,6 @@ var clientSecret = process.env.APP_CLIENT_SECRET || require('./conf.js').APP_CLI
 var redirectUri = process.env.APP_REDIRECT_URI || 'http://it704.herokuapp.com/auth/yahoo/callback';
 
 var fantasyData = require('./global.js').fantasyData;
-/*console.log(typeof fantasyData);
-console.log("fantasyData name (server.js): " + fantasyData.name);
-var newKey = "artist";
-var newVal = "cammyt";
-fantasyData[newKey] = newVal;
-console.log("Artist: " + fantasyData.artist);*/
 
 var yf = new YantasySports();
 
@@ -151,7 +145,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
         fantasyData.team_key,
         function(err, data) {
           if (err) {
-            console.log("this happened");
+            console.log("Error on yf.roster.players");
             console.log(err);
           } else {
             req.session.result = data;
