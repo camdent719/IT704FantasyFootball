@@ -44,13 +44,9 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
-  console.log("/ entered");
   var data;
   if (req.session.result) {
     data = JSON.stringify(req.session.result, null, 2); // gets string rep. of data
-    
-    //var game_id = req.session.result.games[0].game_id;
-    //console.log("game_id: " + game_id);
   }
   
   res.render('home', {
@@ -61,13 +57,11 @@ app.get('/', function(req, res) {
 });
 
 app.get('/logout', function(req, res) {
-  console.log("/logout entered");
   delete req.session.token;
   res.redirect('/');
 });
 
 app.get('/auth/yahoo', function(req, res) {
-  console.log("/auth/yahoo entered");
   var authorizationUrl = 'https://api.login.yahoo.com/oauth2/request_auth';
   var queryParams = qs.stringify({
     client_id: clientId,
@@ -79,7 +73,6 @@ app.get('/auth/yahoo', function(req, res) {
 });
 
 app.get('/auth/yahoo/callback', function(req, res) {
-  console.log("/auth/yahoo/callback entered");
   var accessTokenUrl = 'https://api.login.yahoo.com/oauth2/get_token';
   var options = {
     url: accessTokenUrl,
@@ -169,6 +162,12 @@ app.get('/auth/yahoo/callback', function(req, res) {
             console.log(err);
           } else {
             req.session.result = data;
+            var roster = [];
+            for( player in req.session.result.roster) {
+              roster.push(req.session.result.roster[player].name.full);
+            }
+            fantasyData["roster"] = roster;
+            console.log(fantasyData);
           }
           return res.redirect('/');
         }
@@ -178,6 +177,5 @@ app.get('/auth/yahoo/callback', function(req, res) {
 });
 
 app.listen(app.get('port'), function() {
-  console.log("listen port entered");
   console.log('Express server listening on port ' + app.get('port'));
 });
