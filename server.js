@@ -157,18 +157,20 @@ app.get('/auth/yahoo/callback', function(req, res) {
       
       console.log(fantasyData);
       
-      yf.roster.players(
-        fantasyData.team_key,
-        function(err, data) {
-          if (err) {
-            console.log("this happeneddddd");
-            console.log(err);
-          } else {
-            req.session.result = data;
+      for (var i = 0; i < 2; i++) {
+        yf.roster.players(
+          fantasyData.team_key,
+          function(err, data) {
+            if (err) {
+              console.log("this happeneddddd");
+              console.log(err);
+            } else {
+              req.session.result = data;
+            }
+            return res.redirect('/');
           }
-          return res.redirect('/');
-        }
-      );
+        );
+      }
     }
   });
 });
