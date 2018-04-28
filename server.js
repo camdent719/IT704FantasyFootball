@@ -123,7 +123,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
       
       yf.user.game_leagues(
         fantasyData.game_key, 
-        setTimeout(function(err, data) {
+        function(err, data) {
           if (err)
             console.log(err);
           else {
@@ -134,12 +134,12 @@ app.get('/auth/yahoo/callback', function(req, res) {
             fantasyData["league_id"] = req.session.result.leagues[0].leagues[0].league_id;
           }
           //return res.redirect('/');
-        }, 1000);
+        }
       );
       
       yf.user.game_teams(
         fantasyData.game_key, 
-        setTimeout(function(err, data) {
+        function(err, data) {
           if (err)
             console.log(err);
           else {
@@ -152,14 +152,14 @@ app.get('/auth/yahoo/callback', function(req, res) {
             //req.session.result = "Game key: " + game_key + "\nTeam key: " + team_key + "\nLeague_id: " + league_id;
           }
           //return res.redirect('/');
-        }, 1000);
+        }
       );
       
       console.log(fantasyData);
       
       yf.roster.players(
         fantasyData.team_key,
-        setTimeout(function(err, data) {
+        function(err, data) {
           if (err) {
             console.log("this happeneddddd");
             console.log(err);
@@ -167,7 +167,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
             req.session.result = data;
           }
           return res.redirect('/');
-        }, 1000);
+        }
       );
     }
   });
