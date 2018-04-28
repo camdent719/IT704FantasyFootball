@@ -188,7 +188,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
               } else {
                 var opponent_name, opponent_score, opponent_proj, user_score, user_proj;
                 var i = 0;
-                for (team in game.teams) { // traverse array of the 2 teams in the matchup
+                for (team in req.session.result.scoreboard.matchups[game].teams) { // traverse array of the 2 teams in the matchup
                   console.log(i);
                   if (game.teams[team].name != fantasyData.team_name) { // if is the opponent
                     console.log("--- it was the opponent");
