@@ -188,10 +188,12 @@ app.get('/auth/yahoo/callback', function(req, res) {
                 var opponent_name, opponent_score, opponent_proj, user_score, user_proj;
                 for (team in game.teams) { // traverse array of the 2 teams in the matchup
                   if (team.name != fantasyData.team_name) { // if is the opponent
+                    console.log("--- it was the opponent");
                     opponent_name = team.name;
                     opponent_score = team.points.total;
                     opponent_proj = team.projected_points.total;
                   } else { // else if is the logged-in user
+                    console.log("--- it was me");
                     user_score = team.points.total;
                     user_proj = team.projected_points.total;
                   }
