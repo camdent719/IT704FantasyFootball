@@ -173,7 +173,6 @@ app.get('/auth/yahoo/callback', function(req, res) {
       // using the league key, get info about the current matchup (score, teams)
       yf.league.scoreboard(
         fantasyData.league_key,
-        week, // optional 
         function(err, data) {
           if (err)
             console.log(err);
