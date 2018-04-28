@@ -1,2 +1,5 @@
-global.fantasyData = {"name": "test"};
-console.log("fantasyData name (global.js): " + fantasyData.name);
+module.exports = {
+  'fantasyData': {
+    'name': 'test'
+  }
+}
