@@ -20,6 +20,10 @@ var clientId = process.env.APP_CLIENT_ID || require('./conf.js').APP_CLIENT_ID;
 var clientSecret = process.env.APP_CLIENT_SECRET || require('./conf.js').APP_CLIENT_SECRET;
 var redirectUri = process.env.APP_REDIRECT_URI || 'http://it704.herokuapp.com/auth/yahoo/callback';
 
+var fantasyData = require('./global.js').fantasyData;
+console.log(typeof fantasyData);
+console.log("fantasyData name (server.js): " + fantasyData.name);
+
 var yf = new YantasySports();
 
 var app = express();
@@ -99,8 +103,6 @@ app.get('/auth/yahoo/callback', function(req, res) {
       var team_name;
       var team_key;
       var team_id;
-      
-      console.log("fantasyData name (server.js): " + fantasyData.name);
       
       yf.setUserToken(accessToken);
       yf.user.games(
