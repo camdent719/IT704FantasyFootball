@@ -23,6 +23,10 @@ var redirectUri = process.env.APP_REDIRECT_URI || 'http://it704.herokuapp.com/au
 var fantasyData = require('./global.js').fantasyData;
 console.log(typeof fantasyData);
 console.log("fantasyData name (server.js): " + fantasyData.name);
+var newKey = "artist";
+var newVal = "cammyt";
+fantasyData[newKey] = newVal;
+console.log("Artist: " + fantasyData.artist);
 
 var yf = new YantasySports();
 
