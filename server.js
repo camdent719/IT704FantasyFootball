@@ -175,10 +175,11 @@ app.get('/auth/yahoo/callback', function(req, res) {
         fantasyData.league_key,
         15, // this is the last week that Camden had a game
         function(err, data) {
-          if (err)
+          if (err) {
+            console.log("Error on yf.league.scoreboard");
             console.log(err);
-          else {
-            //req.session.result = data;
+          } else {
+            req.session.result = data;
             
             for (game in req.session.result.scoreboard.matchups) {
               if (req.session.result.scoreboard.matchups[game].teams[0].team_key != fantasyData.team_key && 
@@ -211,13 +212,13 @@ app.get('/auth/yahoo/callback', function(req, res) {
               }
             }
             
-            //console.log(fantasyData);
-            req.session.result = fantasyData;
+            console.log(fantasyData);
+            //req.session.result = fantasyData;
           }
           return res.redirect('/');
         }
       );
-      console.log(fantasyData);
+      //console.log(fantasyData);
     }
   });
 });
