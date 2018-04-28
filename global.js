@@ -1,5 +1,5 @@
 module.exports = {
   'fantasyData': {
-    'name': 'test'
+    'testKey': 'testVal'
   }
 }
