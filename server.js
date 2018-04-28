@@ -211,12 +211,13 @@ app.get('/auth/yahoo/callback', function(req, res) {
               }
             }
             
-            console.log(fantasyData);
+            //console.log(fantasyData);
             req.session.result = fantasyData;
           }
           return res.redirect('/');
         }
       );
+      console.log(fantasyData);
     }
   });
 });
