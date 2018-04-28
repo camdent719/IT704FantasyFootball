@@ -95,17 +95,9 @@ app.get('/auth/yahoo/callback', function(req, res) {
       //var refreshToken = body.refresh_token;
 
       req.session.token = accessToken;
-      
-      //var game_key;
-      //var league_name;
-      //var num_teams;
-      //var league_key;
-      //var league_id;
-      //var team_name;
-      //var team_key;
-      //var team_id;
-      
       yf.setUserToken(accessToken);
+      
+      // gets the game key
       yf.user.games(
         function(err, data) {
           if (err)
@@ -118,6 +110,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
         }
       );
       
+      // using the game key, get league name, num teams in league, league key and league id
       yf.user.game_leagues(
         fantasyData.game_key, 
         function(err, data) {
@@ -134,6 +127,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
         }
       );
       
+      // using the game key, get the user's team name, team key, and team id
       yf.user.game_teams(
         fantasyData.game_key, 
         function(err, data) {
@@ -152,8 +146,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
         }
       );
       
-      console.log(fantasyData);
-      
+      // using the team key, get player info
       yf.roster.players(
         fantasyData.team_key,
         function(err, data) {
@@ -172,6 +165,20 @@ app.get('/auth/yahoo/callback', function(req, res) {
               roster.push(currPlayer);
             }
             fantasyData["roster"] = roster;
+          }
+          //return res.redirect('/');
+        }
+      );
+      
+      // using the league key, get info about the current matchup (score, teams)
+      yf.league.scoreboard(
+        fantasyData.league_key,
+        week, // optional 
+        function(err, data) {
+          if (err)
+            console.log(err);
+          else {
+            req.session.result = data;
             console.log(fantasyData);
           }
           return res.redirect('/');
