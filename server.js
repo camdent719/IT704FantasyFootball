@@ -142,7 +142,7 @@ app.get('/auth/test/callback', function(req, res) {
       
       // using the team key, get player info
       yf.roster.players(
-        fantasyData.team_key,
+        "371.l.1075055.t.9", //fantasyData.team_key,
         function(err, data) {
           if (err) {
             console.log("Error on yf.roster.players");
@@ -166,7 +166,7 @@ app.get('/auth/test/callback', function(req, res) {
       
       // using the league key, get info about the current matchup (score, teams)
       yf.league.scoreboard(
-        fantasyData.league_key,
+        "371.l.1075055", //fantasyData.league_key,
         15, // this is the last week that Camden had a game
         function(err, data) {
           if (err) {
