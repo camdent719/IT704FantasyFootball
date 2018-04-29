@@ -162,6 +162,8 @@ app.get('/auth/test/callback', function(req, res) {
               roster.push(currPlayer);
             }
             fantasyData["roster"] = roster;
+            
+            req.session.result = fantasyData;
           }
           console.log(fantasyData);
           return res.redirect('/');
