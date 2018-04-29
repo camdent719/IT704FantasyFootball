@@ -101,6 +101,7 @@ app.get('/auth/test/callback', function(req, res) {
             fantasyData["game_key"] = req.session.result.games[0].game_key;
           }
           //return res.redirect('/');
+          console.log(fantasyData);
         }
       );
       
@@ -121,6 +122,7 @@ app.get('/auth/test/callback', function(req, res) {
             fantasyData["league_id"] = req.session.result.leagues[0].leagues[0].league_id;
           }
           //return res.redirect('/');
+          console.log(fantasyData);
         }
       );
       
@@ -143,6 +145,7 @@ app.get('/auth/test/callback', function(req, res) {
             //req.session.result = "Game key: " + game_key + "\nTeam key: " + team_key + "\nLeague_id: " + league_id;
           }
           //return res.redirect('/');
+          console.log(fantasyData);
         }
       );
       
@@ -170,6 +173,7 @@ app.get('/auth/test/callback', function(req, res) {
             fantasyData["roster"] = roster;
           }
           //return res.redirect('/');
+          console.log(fantasyData);
         }
       );
       
