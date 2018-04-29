@@ -106,7 +106,7 @@ app.get('/auth/test/callback', function(req, res) {
       
       // using the game key, get league name, num teams in league, league key and league id
       yf.user.game_leagues(
-        371, //fantasyData.game_key, 
+        fantasyData.game_key, //371, //
         function(err, data) {
           if (err)
             console.log(err);
@@ -123,7 +123,7 @@ app.get('/auth/test/callback', function(req, res) {
       
       // using the game key, get the user's team name, team key, and team id
       yf.user.game_teams(
-        371, //fantasyData.game_key, 
+        fantasyData.game_key, //371, //
         function(err, data) {
           if (err)
             console.log(err);
@@ -142,13 +142,13 @@ app.get('/auth/test/callback', function(req, res) {
       
       // using the team key, get player info
       yf.roster.players(
-        "371.l.1075055.t.9", //fantasyData.team_key,
+        fantasyData.team_key, //"371.l.1075055.t.9", //
         function(err, data) {
           if (err) {
             console.log("Error on yf.roster.players");
             console.log(err);
           } else {
-            req.session.result = data;
+            //req.session.result = data;
             var roster = [];
             for (player in req.session.result.roster) {
               var currPlayer = {
@@ -166,7 +166,7 @@ app.get('/auth/test/callback', function(req, res) {
       
       // using the league key, get info about the current matchup (score, teams)
       yf.league.scoreboard(
-        "371.l.1075055", //fantasyData.league_key,
+        fantasyData.league_key, //"371.l.1075055", //
         15, // this is the last week that Camden had a game
         function(err, data) {
           if (err) {
