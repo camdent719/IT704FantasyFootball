@@ -104,6 +104,9 @@ app.get('/auth/test/callback', function(req, res) {
         }
       );
       
+      req.session.token = accessToken;
+      yf.setUserToken(accessToken);
+      
       // using the game key, get league name, num teams in league, league key and league id
       yf.user.game_leagues(
         fantasyData.game_key, //371, //
@@ -120,6 +123,9 @@ app.get('/auth/test/callback', function(req, res) {
           //return res.redirect('/');
         }
       );
+      
+      req.session.token = accessToken;
+      yf.setUserToken(accessToken);
       
       // using the game key, get the user's team name, team key, and team id
       yf.user.game_teams(
@@ -139,6 +145,9 @@ app.get('/auth/test/callback', function(req, res) {
           //return res.redirect('/');
         }
       );
+      
+      req.session.token = accessToken;
+      yf.setUserToken(accessToken);
       
       // using the team key, get player info
       yf.roster.players(
@@ -163,6 +172,9 @@ app.get('/auth/test/callback', function(req, res) {
           //return res.redirect('/');
         }
       );
+      
+      req.session.token = accessToken;
+      yf.setUserToken(accessToken);
       
       // using the league key, get info about the current matchup (score, teams)
       yf.league.scoreboard(
