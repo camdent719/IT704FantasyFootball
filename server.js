@@ -18,15 +18,9 @@ var YantasySports = require('yahoo-fantasy-without-auth');
 
 var clientId = process.env.APP_CLIENT_ID || require('./conf.js').APP_CLIENT_ID;
 var clientSecret = process.env.APP_CLIENT_SECRET || require('./conf.js').APP_CLIENT_SECRET;
-var redirectUri = process.env.APP_REDIRECT_URI || 'http://it704.herokuapp.com/auth/yahoo/callback';
+var redirectUri = process.env.APP_REDIRECT_URI || 'http://it704.herokuapp.com/auth/test/callback';
 
 var fantasyData = require('./global.js').fantasyData;
-/*console.log(typeof fantasyData);
-console.log("fantasyData name (server.js): " + fantasyData.name);
-var newKey = "artist";
-var newVal = "cammyt";
-fantasyData[newKey] = newVal;
-console.log("Artist: " + fantasyData.artist);*/
 
 var yf = new YantasySports();
 
@@ -61,7 +55,7 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
-app.get('/auth/yahoo', function(req, res) {
+app.get('/auth/test', function(req, res) {
   var authorizationUrl = 'https://api.login.yahoo.com/oauth2/request_auth';
   var queryParams = qs.stringify({
     client_id: clientId,
@@ -72,7 +66,7 @@ app.get('/auth/yahoo', function(req, res) {
   res.redirect(authorizationUrl + '?' + queryParams);
 });
 
-app.get('/auth/yahoo/callback', function(req, res) {
+app.get('/auth/test/callback', function(req, res) {
   var accessTokenUrl = 'https://api.login.yahoo.com/oauth2/get_token';
   var options = {
     url: accessTokenUrl,
@@ -151,7 +145,7 @@ app.get('/auth/yahoo/callback', function(req, res) {
         fantasyData.team_key,
         function(err, data) {
           if (err) {
-            console.log("this happened");
+            console.log("Error on yf.roster.players");
             console.log(err);
           } else {
             req.session.result = data;
