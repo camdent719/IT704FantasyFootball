@@ -90,7 +90,7 @@ app.get('/auth/test/callback', function(req, res) {
 
       req.session.token = accessToken;
       yf.setUserToken(accessToken);
-      
+      /*
       // gets the game key
       yf.user.games(
         function(err, data) {
@@ -142,7 +142,7 @@ app.get('/auth/test/callback', function(req, res) {
           console.log("yf.user.game_teams " + fantasyData);
         }
       );
-      
+      */
       // using the team key, get player info
       yf.roster.players(
         "371.l.1075055.t.9", //fantasyData.team_key, 
@@ -163,8 +163,8 @@ app.get('/auth/test/callback', function(req, res) {
             }
             fantasyData["roster"] = roster;
           }
+          console.log(fantasyData);
           return res.redirect('/');
-          console.log("yf.roster.players " + fantasyData);
         }
       );
       /*
