@@ -101,12 +101,9 @@ app.get('/auth/test/callback', function(req, res) {
             fantasyData["game_key"] = req.session.result.games[0].game_key;
           }
           //return res.redirect('/');
-          console.log(fantasyData);
+          console.log("yf.user.games " + fantasyData);
         }
       );
-      
-      req.session.token = accessToken;
-      yf.setUserToken(accessToken);
       
       // using the game key, get league name, num teams in league, league key and league id
       yf.user.game_leagues(
@@ -122,12 +119,9 @@ app.get('/auth/test/callback', function(req, res) {
             fantasyData["league_id"] = req.session.result.leagues[0].leagues[0].league_id;
           }
           //return res.redirect('/');
-          console.log(fantasyData);
+          console.log("yf.user.game_leagues " + fantasyData);
         }
       );
-      
-      req.session.token = accessToken;
-      yf.setUserToken(accessToken);
       
       // using the game key, get the user's team name, team key, and team id
       yf.user.game_teams(
@@ -145,12 +139,9 @@ app.get('/auth/test/callback', function(req, res) {
             //req.session.result = "Game key: " + game_key + "\nTeam key: " + team_key + "\nLeague_id: " + league_id;
           }
           //return res.redirect('/');
-          console.log(fantasyData);
+          console.log("yf.user.game_teams " + fantasyData);
         }
       );
-      
-      req.session.token = accessToken;
-      yf.setUserToken(accessToken);
       
       // using the team key, get player info
       yf.roster.players(
@@ -173,12 +164,9 @@ app.get('/auth/test/callback', function(req, res) {
             fantasyData["roster"] = roster;
           }
           //return res.redirect('/');
-          console.log(fantasyData);
+          console.log("yf.roster.players " + fantasyData);
         }
       );
-      
-      req.session.token = accessToken;
-      yf.setUserToken(accessToken);
       
       // using the league key, get info about the current matchup (score, teams)
       yf.league.scoreboard(
@@ -222,7 +210,7 @@ app.get('/auth/test/callback', function(req, res) {
               }
             }
             
-            console.log(fantasyData);
+            console.log("yf.league.scoreboard " + fantasyData);
             req.session.result = fantasyData;
           }
           return res.redirect('/');
