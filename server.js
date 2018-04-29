@@ -163,11 +163,11 @@ app.get('/auth/test/callback', function(req, res) {
             }
             fantasyData["roster"] = roster;
           }
-          //return res.redirect('/');
+          return res.redirect('/');
           console.log("yf.roster.players " + fantasyData);
         }
       );
-      
+      /*
       // using the league key, get info about the current matchup (score, teams)
       yf.league.scoreboard(
         "371.l.1075055", //fantasyData.league_key,
@@ -215,7 +215,7 @@ app.get('/auth/test/callback', function(req, res) {
           }
           return res.redirect('/');
         }
-      );
+      );*/
       //console.log(fantasyData);
     }
   });
