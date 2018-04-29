@@ -97,10 +97,10 @@ app.get('/auth/test/callback', function(req, res) {
           if (err)
             console.log(err);
           else {
-            req.session.result = data;
+            //req.session.result = data;
             fantasyData["game_key"] = req.session.result.games[0].game_key;
           }
-          //return res.redirect('/');
+          return res.redirect('/');
         }
       );
       
@@ -111,13 +111,13 @@ app.get('/auth/test/callback', function(req, res) {
           if (err)
             console.log(err);
           else {
-            req.session.result = data;
+            //req.session.result = data;
             fantasyData["league_name"] = req.session.result.leagues[0].leagues[0].name;
             fantasyData["num_teams"] = req.session.result.leagues[0].leagues[0].num_teams;
             fantasyData["league_key"] = req.session.result.leagues[0].leagues[0].league_key;
             fantasyData["league_id"] = req.session.result.leagues[0].leagues[0].league_id;
           }
-          //return res.redirect('/');
+          return res.redirect('/');
         }
       );
       
@@ -136,7 +136,7 @@ app.get('/auth/test/callback', function(req, res) {
             
             //req.session.result = "Game key: " + game_key + "\nTeam key: " + team_key + "\nLeague_id: " + league_id;
           }
-          //return res.redirect('/');
+          return res.redirect('/');
         }
       );
       
@@ -160,7 +160,7 @@ app.get('/auth/test/callback', function(req, res) {
             }
             fantasyData["roster"] = roster;
           }
-          //return res.redirect('/');
+          return res.redirect('/');
         }
       );
       
@@ -207,7 +207,7 @@ app.get('/auth/test/callback', function(req, res) {
             }
             
             console.log(fantasyData);
-            //req.session.result = fantasyData;
+            req.session.result = fantasyData;
           }
           return res.redirect('/');
         }
