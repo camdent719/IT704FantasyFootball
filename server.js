@@ -219,11 +219,11 @@ function performNextTwoCalls() {
         console.log(err);
       else {
         console.log("*** 2. user.game_leagues");
-        req.session.result = data;
-        fantasyData["league_name"] = req.session.result.leagues[0].leagues[0].name;
-        fantasyData["num_teams"] = req.session.result.leagues[0].leagues[0].num_teams;
-        fantasyData["league_key"] = req.session.result.leagues[0].leagues[0].league_key;
-        fantasyData["league_id"] = req.session.result.leagues[0].leagues[0].league_id;
+        //req.session.result = data;
+        fantasyData["league_name"] = data.leagues[0].leagues[0].name;
+        fantasyData["num_teams"] = data.leagues[0].leagues[0].num_teams;
+        fantasyData["league_key"] = data.leagues[0].leagues[0].league_key;
+        fantasyData["league_id"] = data.leagues[0].leagues[0].league_id;
       }
       //return res.redirect('/');
       //console.log("yf.user.game_leagues " + fantasyData);
@@ -238,10 +238,10 @@ function performNextTwoCalls() {
         console.log(err);
       else {
         console.log("*** 3. user.game_teams");
-        req.session.result = data;
-        fantasyData["team_name"] = req.session.result.teams[0].teams[0].name;
-        fantasyData["team_key"] = req.session.result.teams[0].teams[0].team_key;
-        fantasyData["team_id"] = req.session.result.teams[0].teams[0].team_id;
+        //req.session.result = data;
+        fantasyData["team_name"] = data.teams[0].teams[0].name;
+        fantasyData["team_key"] = data.teams[0].teams[0].team_key;
+        fantasyData["team_id"] = data.teams[0].teams[0].team_id;
       }
       //return res.redirect('/');
       //console.log("yf.user.game_teams " + fantasyData);
