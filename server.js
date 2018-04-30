@@ -108,6 +108,11 @@ app.get('/auth/test/callback', function(req, res) {
           var resultLeagueScoreboard = setTimeout(callLeagueScoreboard, 1000);*/
           
           req.session.result = await fantasyData;
+          
+          var ourData = JSON.stringify(fantasyData);
+          var file = require('file');
+          file.writeFile('sample.json', json, 'utf8', callback);
+          
           return await res.redirect('/');
         }
         asynchronousCalls();
