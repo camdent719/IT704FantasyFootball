@@ -157,6 +157,7 @@ app.get('/auth/test/callback', function(req, res) {
           if (err) {
             console.log("Error on yf.roster.players");
             console.log(err);
+            console.log(fantasyData);
           } else {
             req.session.result = data;
             var roster = [];
@@ -185,6 +186,7 @@ app.get('/auth/test/callback', function(req, res) {
           if (err) {
             console.log("Error on yf.league.scoreboard");
             console.log(err);
+            console.log(fantasyData);
           } else {
             req.session.result = data;
             
