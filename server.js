@@ -116,91 +116,17 @@ app.get('/auth/test/callback', function(req, res) {
       } else {
         console.log("this IS in fact fantasy football - 371");
         performNextTwoCalls(); //setTimeout(performNextTwoCalls, 1000);
+        performLastTwoCalls();
+        
+        req.session.result = fantasyData;
+        return res.redirect('/');
       }
       
       
       
       
       
-      // using the team key, get player info
-      yf.roster.players(
-        fantasyData.team_key, //fantasyData["team_key"], //"371.l.1075055.t.9", //
-        function(err, data) {
-          if (err) {
-            console.log("Error on yf.roster.players");
-            console.log(err);
-            console.log(fantasyData);
-          } else {
-            console.log("*** 4. roster.players");
-            req.session.result = data;
-            var roster = [];
-            for (player in req.session.result.roster) {
-              var currPlayer = {
-                "name": req.session.result.roster[player].name.full,
-                "position": req.session.result.roster[player].display_position,
-                "team": req.session.result.roster[player].editorial_team_abbr
-              }
-              roster.push(currPlayer);
-            }
-            fantasyData["roster"] = roster;
-            
-            req.session.result = fantasyData;
-          }
-          //console.log(fantasyData);
-          //return res.redirect('/');
-        }
-      );
       
-      // using the league key, get info about the current matchup (score, teams)
-      yf.league.scoreboard(
-        fantasyData.league_key, //fantasyData["league_key"], //"371.l.1075055", //
-        15, // this is the last week that Camden had a game
-        function(err, data) {
-          if (err) {
-            console.log("Error on yf.league.scoreboard");
-            console.log(err);
-            console.log(fantasyData);
-          } else {
-            console.log("*** 5. league.scoreboard");
-            req.session.result = data;
-            
-            for (game in req.session.result.scoreboard.matchups) {
-              if (req.session.result.scoreboard.matchups[game].teams[0].team_key != fantasyData.team_key && 
-                  req.session.result.scoreboard.matchups[game].teams[1].team_key != fantasyData.team_key) {
-                continue; // if the user is not a part of this game, skip it
-              } else { // this game is one that the user is in
-                var opponent_name, opponent_score, opponent_proj, user_score, user_proj;
-                
-                // traverse array of the 2 teams in the matchup
-                for (team in req.session.result.scoreboard.matchups[game].teams) { 
-                  if (req.session.result.scoreboard.matchups[game].teams[team].name != fantasyData.team_name) { // if is the opponent
-                    opponent_name = req.session.result.scoreboard.matchups[game].teams[team].name;
-                    opponent_score = req.session.result.scoreboard.matchups[game].teams[team].points.total;
-                    opponent_proj = req.session.result.scoreboard.matchups[game].teams[team].projected_points.total;
-                  } else { // else if is the user
-                    user_score = req.session.result.scoreboard.matchups[game].teams[team].points.total;
-                    user_proj = req.session.result.scoreboard.matchups[game].teams[team].projected_points.total;
-                  }
-                }
-                
-                var matchup = { // create matchup obj with matchup info
-                  "opponent_name": opponent_name,
-                  "opponent_score": opponent_score,
-                  "opponent_proj": opponent_proj,
-                  "user_score": user_score,
-                  "user_proj": user_proj
-                }
-                fantasyData["matchup"] = matchup;
-                break; // user will only be in one game, so once we've found it we're done
-              }
-            }
-            
-            console.log("yf.league.scoreboard " + fantasyData);
-            req.session.result = fantasyData;
-          }
-          return res.redirect('/');
-        }
-      );
       //console.log(fantasyData);
     }
   });
@@ -245,6 +171,88 @@ function performNextTwoCalls() {
       }
       //return res.redirect('/');
       //console.log("yf.user.game_teams " + fantasyData);
+    }
+  );
+}
+
+function performLastTwoCalls() {
+  // using the team key, get player info
+  yf.roster.players(
+    fantasyData.team_key, //fantasyData["team_key"], //"371.l.1075055.t.9", //
+    function(err, data) {
+      if (err) {
+        console.log("Error on yf.roster.players");
+        console.log(err);
+        console.log(fantasyData);
+      } else {
+        console.log("*** 4. roster.players");
+        //req.session.result = data;
+        var roster = [];
+        for (player in data.roster) {
+          var currPlayer = {
+            "name": data.roster[player].name.full,
+            "position": data.roster[player].display_position,
+            "team": data.roster[player].editorial_team_abbr
+          }
+          roster.push(currPlayer);
+        }
+        fantasyData["roster"] = roster;
+        
+        //req.session.result = fantasyData;
+      }
+      //console.log(fantasyData);
+      //return res.redirect('/');
+    }
+  );
+  
+  // using the league key, get info about the current matchup (score, teams)
+  yf.league.scoreboard(
+    fantasyData.league_key, //fantasyData["league_key"], //"371.l.1075055", //
+    15, // this is the last week that Camden had a game
+    function(err, data) {
+      if (err) {
+        console.log("Error on yf.league.scoreboard");
+        console.log(err);
+        console.log(fantasyData);
+      } else {
+        console.log("*** 5. league.scoreboard");
+        //req.session.result = data;
+        
+        for (game in data.scoreboard.matchups) {
+          if (data.scoreboard.matchups[game].teams[0].team_key != fantasyData.team_key && 
+              data.scoreboard.matchups[game].teams[1].team_key != fantasyData.team_key) {
+            continue; // if the user is not a part of this game, skip it
+          } else { // this game is one that the user is in
+            var opponent_name, opponent_score, opponent_proj, user_score, user_proj;
+            
+            // traverse array of the 2 teams in the matchup
+            for (team in data.scoreboard.matchups[game].teams) { 
+              if (data.scoreboard.matchups[game].teams[team].name != fantasyData.team_name) { // if is the opponent
+                opponent_name = data.scoreboard.matchups[game].teams[team].name;
+                opponent_score = data.scoreboard.matchups[game].teams[team].points.total;
+                opponent_proj = data.scoreboard.matchups[game].teams[team].projected_points.total;
+              } else { // else if is the user
+                user_score = data.scoreboard.matchups[game].teams[team].points.total;
+                user_proj = data.scoreboard.matchups[game].teams[team].projected_points.total;
+              }
+            }
+            
+            var matchup = { // create matchup obj with matchup info
+              "opponent_name": opponent_name,
+              "opponent_score": opponent_score,
+              "opponent_proj": opponent_proj,
+              "user_score": user_score,
+              "user_proj": user_proj
+            }
+            fantasyData["matchup"] = matchup;
+            break; // user will only be in one game, so once we've found it we're done
+          }
+        }
+        
+        console.log("yf.league.scoreboard " + fantasyData);
+        //req.session.result = fantasyData;
+      }
+      //return res.redirect('/');
     }
   );
 }
