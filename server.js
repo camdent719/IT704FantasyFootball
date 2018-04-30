@@ -98,15 +98,19 @@ app.get('/auth/test/callback', function(req, res) {
         console.log("this IS in fact fantasy football - 371");
         
         async function asynchronousCalls() {
-          var resultUserGameLeagues = await callUserGameLeagues();
+          /*var resultUserGameLeagues = await callUserGameLeagues();
           var resultUserGameTeams = await callUserGameTeams();
           var resultRosterPlayers = await callRosterPlayers();
-          var resultLeagueScoreboard = await callLeagueScoreboard();
+          var resultLeagueScoreboard = await callLeagueScoreboard();*/
+          var resultUserGameLeagues = setTimeout(callUserGameLeagues, 1000);
+          var resultUserGameTeams = setTimeout(callUserGameTeams, 1000);
+          var resultRosterPlayers = setTimeout(callRosterPlayers, 1000);
+          var resultLeagueScoreboard = setTimeout(callLeagueScoreboard, 1000);
+          
+          req.session.result = await fantasyData;
+          return res.redirect('/');
         }
         asynchronousCalls();
-        
-        req.session.result = fantasyData;
-        return res.redirect('/');
       }
       
       //console.log(fantasyData);
