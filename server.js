@@ -108,7 +108,7 @@ app.get('/auth/test/callback', function(req, res) {
           var resultLeagueScoreboard = setTimeout(callLeagueScoreboard, 1000);
           
           req.session.result = await fantasyData;
-          return res.redirect('/');
+          return await res.redirect('/');
         }
         asynchronousCalls();
       }
