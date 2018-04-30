@@ -1,4 +1,4 @@
-
+// confirmed to work with node version 5.10.1
 /**
  * Create conf.js like below
  *

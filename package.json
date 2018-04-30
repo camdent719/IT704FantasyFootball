@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "NodeJS sample application for Yahoo OAuth 2.0 + yfsapi-without-auth",
   "engines": {
-    "node": "5.10.1"
+    "node": "7.6.0"
   },
   "main": "server.js",
   "scripts": {
