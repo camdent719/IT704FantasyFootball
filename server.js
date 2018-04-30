@@ -90,40 +90,21 @@ app.get('/auth/test/callback', function(req, res) {
       req.session.token = accessToken;
       yf.setUserToken(accessToken);
       
-      var isGameFootball = true;
-      
-      // gets the game key
-      yf.user.games(
-        function(err, data) {
-          if (err)
-            console.log(err);
-          else {
-            console.log("*** 1. user.games");
-            req.session.result = data;
-            fantasyData["game_key"] = req.session.result.games[0].game_key;
-            if (fantasyData.game_key != 371)
-              isGameFootball = false;
-          }
-          //return res.redirect('/');
-          //console.log("yf.user.games " + fantasyData);
-        }
-      );
-      
+      var isGameFootball = await callUserGames();  
       if (!isGameFootball) {
         req.session.result = "This game is not Fantasy Football.";
         return;
       } else {
         console.log("this IS in fact fantasy football - 371");
-        performNextTwoCalls().then(performLastTwoCalls());
+        
+        var resultUserGameLeagues = await callUserGameLeagues();
+        var resultUserGameTeams = await callUserGameTeams();
+        var resultRosterPlayers = await callRosterPlayers();
+        var resultLeagueScoreboard = await callLeagueScoreboard();
         
         req.session.result = fantasyData;
         return res.redirect('/');
       }
-      
-      
-      
-      
-      
       
       //console.log(fantasyData);
     }
@@ -134,7 +115,27 @@ app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-async function performNextTwoCalls() {
+async function callUserGames() {
+  // gets the game key
+  yf.user.games(
+    function(err, data) {
+      if (err)
+        console.log(err);
+      else {
+        console.log("*** 1. user.games");
+        req.session.result = data;
+        fantasyData["game_key"] = req.session.result.games[0].game_key;
+        if (fantasyData.game_key != 371)
+          return false;
+      }
+      //return res.redirect('/');
+      //console.log("yf.user.games " + fantasyData);
+      return true;
+    }
+  );
+}
+
+async function callUserGameLeagues() {
   // using the game key, get league name, num teams in league, league key and league id
   await yf.user.game_leagues(
     "371", //fantasyData.game_key, //fantasyData["game_key"], 
@@ -151,9 +152,12 @@ async function performNextTwoCalls() {
       }
       //return res.redirect('/');
       //console.log("yf.user.game_leagues " + fantasyData);
+      return true;
     }
   );
-  
+}
+
+async function callUserGameTeams() {
   // using the game key, get the user's team name, team key, and team id
   await yf.user.game_teams(
     "371", //fantasyData.game_key, //fantasyData["game_key"], 
@@ -169,11 +173,12 @@ async function performNextTwoCalls() {
       }
       //return res.redirect('/');
       //console.log("yf.user.game_teams " + fantasyData);
+      return true;
     }
   );
 }
 
-async function performLastTwoCalls() {
+async function callRosterPlayers() {
   // using the team key, get player info
   await yf.roster.players(
     fantasyData.team_key, //fantasyData["team_key"], //"371.l.1075055.t.9", //
@@ -200,9 +205,12 @@ async function performLastTwoCalls() {
       }
       //console.log(fantasyData);
       //return res.redirect('/');
+      return true;
     }
   );
-  
+}
+
+async function callLeagueScoreboard() {
   // using the league key, get info about the current matchup (score, teams)
   await yf.league.scoreboard(
     fantasyData.league_key, //fantasyData["league_key"], //"371.l.1075055", //
@@ -250,6 +258,7 @@ async function performLastTwoCalls() {
         //req.session.result = fantasyData;
       }
       //return res.redirect('/');
+      return true;
     }
   );
 }
