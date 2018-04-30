@@ -273,7 +273,7 @@ async function callLeagueScoreboard() {
               }
             );
             
-            fs.readFile('sample.json', 'utf8', function readFileCallback(err, data){
+            file.readFile('sample.json', 'utf8', function readFileCallback(err, data){
               if (err){
                 console.log(err);
               } else {
