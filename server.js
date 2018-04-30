@@ -198,7 +198,7 @@ async function callRosterPlayers() {
       if (err) {
         console.log("Error on yf.roster.players (4.)");
         console.log(err);
-        console.log(fantasyData);
+        //console.log(fantasyData);
       } else {
         console.log("*** 4. roster.players");
         //req.session.result = data;
@@ -231,7 +231,7 @@ async function callLeagueScoreboard() {
       if (err) {
         console.log("Error on yf.league.scoreboard (5.)");
         console.log(err);
-        console.log(fantasyData);
+        //console.log(fantasyData);
       } else {
         console.log("*** 5. league.scoreboard");
         //req.session.result = data;
