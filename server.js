@@ -90,7 +90,6 @@ app.get('/auth/test/callback', function(req, res) {
       req.session.token = accessToken;
       yf.setUserToken(accessToken);
       
-      var isGameFootball = await callUserGames();  
       if (!isGameFootball) {
         req.session.result = "This game is not Fantasy Football.";
         return;
@@ -98,7 +97,7 @@ app.get('/auth/test/callback', function(req, res) {
         console.log("this IS in fact fantasy football - 371");
         
         async function asynchronousCalls() {
-          var resultUserGameLeagues = callUserGameLeagues();
+          var resultUserGameLeagues = await callUserGameLeagues();
           var resultUserGameTeams = await callUserGameTeams();
           var resultRosterPlayers = await callRosterPlayers();
           var resultLeagueScoreboard = await callLeagueScoreboard();
