@@ -107,7 +107,7 @@ app.get('/auth/test/callback', function(req, res) {
       
       // using the game key, get league name, num teams in league, league key and league id
       yf.user.game_leagues(
-        fantasyData["game_key"], //fantasyData.game_key, // "371",  //req.session.result.games[0].game_key, // 
+        req.session.result.games[0].game_key, //fantasyData["game_key"], //fantasyData.game_key, // "371",  //req.session.result.games[0].game_key, 
         function(err, data) {
           if (err)
             console.log(err);
@@ -125,7 +125,7 @@ app.get('/auth/test/callback', function(req, res) {
       
       // using the game key, get the user's team name, team key, and team id
       yf.user.game_teams(
-        fantasyData["game_key"], //"371", 
+        req.session.result.games[0].game_key, //fantasyData["game_key"], //"371", 
         function(err, data) {
           if (err)
             console.log(err);
@@ -145,7 +145,7 @@ app.get('/auth/test/callback', function(req, res) {
       
       // using the team key, get player info
       yf.roster.players(
-        fantasyData["team_key"], //"371.l.1075055.t.9", //
+        req.session.result.teams[0].teams[0].team_key, //fantasyData["team_key"], //"371.l.1075055.t.9", //
         function(err, data) {
           if (err) {
             console.log("Error on yf.roster.players");
@@ -169,7 +169,7 @@ app.get('/auth/test/callback', function(req, res) {
           //return res.redirect('/');
         }
       );
-      
+      /*
       // using the league key, get info about the current matchup (score, teams)
       yf.league.scoreboard(
         fantasyData["league_key"], //"371.l.1075055", //
@@ -217,7 +217,7 @@ app.get('/auth/test/callback', function(req, res) {
           }
           return res.redirect('/');
         }
-      );
+      );*/
       //console.log(fantasyData);
     }
   });
