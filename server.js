@@ -90,6 +90,8 @@ app.get('/auth/test/callback', function(req, res) {
       req.session.token = accessToken;
       yf.setUserToken(accessToken);
       
+      console.log(fantasyData);
+      
       var isGameFootball = callUserGames();  
       if (!isGameFootball) {
         req.session.result = "This game is not Fantasy Football.";
