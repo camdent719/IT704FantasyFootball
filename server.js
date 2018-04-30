@@ -114,6 +114,7 @@ app.get('/auth/test/callback', function(req, res) {
         return;
       } else {
         console.log("this IS in fact fantasy football - 371");
+        callMyTestFunction();
       }
       
       // using the game key, get league name, num teams in league, league key and league id
@@ -240,3 +241,7 @@ app.get('/auth/test/callback', function(req, res) {
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+function callMyTestFunction() {
+  console.log("my test function worked!");
+}
