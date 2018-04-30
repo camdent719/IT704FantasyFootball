@@ -266,7 +266,7 @@ async function callLeagueScoreboard() {
             //console.log(fantasyData);
             
             var ourData = JSON.stringify(fantasyData);
-            var file = require('file');
+            var file = require('fs');
             file.writeFile('sample.json', ourData, 'utf8', callback);
             
             fs.readFile('sample.json', 'utf8', function readFileCallback(err, data){
