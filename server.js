@@ -124,7 +124,7 @@ app.listen(app.get('port'), function() {
 
 async function callUserGames() {
   // gets the game key
-  await yf.user.games(
+  yf.user.games(
     function(err, data) {
       if (err)
         console.log(err);
@@ -137,6 +137,7 @@ async function callUserGames() {
       }
       //return res.redirect('/');
       //console.log("yf.user.games " + fantasyData);
+      await new Promise((resolve, reject) => setTimeout(resolve, 1000));
       return true;
     }
   );
@@ -159,6 +160,7 @@ async function callUserGameLeagues() {
       }
       //return res.redirect('/');
       //console.log("yf.user.game_leagues " + fantasyData);
+      await new Promise((resolve, reject) => setTimeout(resolve, 1000));
       return true;
     }
   );
@@ -180,6 +182,7 @@ async function callUserGameTeams() {
       }
       //return res.redirect('/');
       //console.log("yf.user.game_teams " + fantasyData);
+      await new Promise((resolve, reject) => setTimeout(resolve, 1000));
       return true;
     }
   );
@@ -212,6 +215,7 @@ async function callRosterPlayers() {
       }
       //console.log(fantasyData);
       //return res.redirect('/');
+      await new Promise((resolve, reject) => setTimeout(resolve, 1000));
       return true;
     }
   );
@@ -265,6 +269,7 @@ async function callLeagueScoreboard() {
         //req.session.result = fantasyData;
       }
       //return res.redirect('/');
+      await new Promise((resolve, reject) => setTimeout(resolve, 1000));
       return true;
     }
   );
