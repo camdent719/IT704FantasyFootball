@@ -137,14 +137,14 @@ async function callUserGames() {
       }
       //return res.redirect('/');
       //console.log("yf.user.games " + fantasyData);
-      return await true;
+      return true;
     }
   );
 }
 
 async function callUserGameLeagues() {
   // using the game key, get league name, num teams in league, league key and league id
-  await yf.user.game_leagues(
+  yf.user.game_leagues(
     "371", //fantasyData.game_key, //fantasyData["game_key"], 
     function(err, data) {
       if (err)
@@ -159,14 +159,14 @@ async function callUserGameLeagues() {
       }
       //return res.redirect('/');
       //console.log("yf.user.game_leagues " + fantasyData);
-      return await true;
+      return true;
     }
   );
 }
 
 async function callUserGameTeams() {
   // using the game key, get the user's team name, team key, and team id
-  await yf.user.game_teams(
+  yf.user.game_teams(
     "371", //fantasyData.game_key, //fantasyData["game_key"], 
     function(err, data) {
       if (err)
@@ -180,14 +180,14 @@ async function callUserGameTeams() {
       }
       //return res.redirect('/');
       //console.log("yf.user.game_teams " + fantasyData);
-      return await true;
+      return true;
     }
   );
 }
 
 async function callRosterPlayers() {
   // using the team key, get player info
-  await yf.roster.players(
+  yf.roster.players(
     fantasyData.team_key, //fantasyData["team_key"], //"371.l.1075055.t.9", //
     function(err, data) {
       if (err) {
@@ -212,14 +212,14 @@ async function callRosterPlayers() {
       }
       //console.log(fantasyData);
       //return res.redirect('/');
-      return await true;
+      return true;
     }
   );
 }
 
 async function callLeagueScoreboard() {
   // using the league key, get info about the current matchup (score, teams)
-  await yf.league.scoreboard(
+  yf.league.scoreboard(
     fantasyData.league_key, //fantasyData["league_key"], //"371.l.1075055", //
     15, // this is the last week that Camden had a game
     function(err, data) {
@@ -265,7 +265,7 @@ async function callLeagueScoreboard() {
         //req.session.result = fantasyData;
       }
       //return res.redirect('/');
-      return await true;
+      return true;
     }
   );
 }
