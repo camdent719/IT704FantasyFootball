@@ -99,9 +99,9 @@ app.get('/auth/test/callback', function(req, res) {
         
         async function asynchronousCalls() {
           var resultUserGameLeagues = await callUserGameLeagues();
-          var resultUserGameTeams = await callUserGameTeams();
-          var resultRosterPlayers = await callRosterPlayers();
-          var resultLeagueScoreboard = await callLeagueScoreboard();
+          //var resultUserGameTeams = await callUserGameTeams();
+          //var resultRosterPlayers = await callRosterPlayers();
+          //var resultLeagueScoreboard = await callLeagueScoreboard();
           /*var resultUserGameLeagues = setTimeout(callUserGameLeagues, 1000);
           var resultUserGameTeams = setTimeout(callUserGameTeams, 1000);
           var resultRosterPlayers = setTimeout(callRosterPlayers, 1000);
@@ -134,10 +134,12 @@ async function callUserGames() {
         fantasyData["game_key"] = data.games[0].game_key;
         if (fantasyData.game_key != 371)
           return false;
+        else 
+          callUserGameLeagues();
       }
       //return res.redirect('/');
       //console.log("yf.user.games " + fantasyData);
-      return true;
+      
     }
   );
 }
@@ -156,6 +158,7 @@ async function callUserGameLeagues() {
         fantasyData["num_teams"] = data.leagues[0].leagues[0].num_teams;
         fantasyData["league_key"] = data.leagues[0].leagues[0].league_key;
         fantasyData["league_id"] = data.leagues[0].leagues[0].league_id;
+        callUserGameTeams();
       }
       //return res.redirect('/');
       //console.log("yf.user.game_leagues " + fantasyData);
@@ -177,6 +180,7 @@ async function callUserGameTeams() {
         fantasyData["team_name"] = data.teams[0].teams[0].name;
         fantasyData["team_key"] = data.teams[0].teams[0].team_key;
         fantasyData["team_id"] = data.teams[0].teams[0].team_id;
+        callRosterPlayers();
       }
       //return res.redirect('/');
       //console.log("yf.user.game_teams " + fantasyData);
@@ -207,7 +211,7 @@ async function callRosterPlayers() {
           roster.push(currPlayer);
         }
         fantasyData["roster"] = roster;
-        
+        callLeagueScoreboard();
         //req.session.result = fantasyData;
       }
       //console.log(fantasyData);
