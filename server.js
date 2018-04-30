@@ -263,11 +263,19 @@ async function callLeagueScoreboard() {
               "user_proj": user_proj
             }
             fantasyData["matchup"] = matchup;
-            console.log(fantasyData);
+            //console.log(fantasyData);
             
             var ourData = JSON.stringify(fantasyData);
             var file = require('file');
             file.writeFile('sample.json', ourData, 'utf8', callback);
+            
+            fs.readFile('sample.json', 'utf8', function readFileCallback(err, data){
+            if (err){
+              console.log(err);
+            } else {
+              obj = JSON.parse(data); //now it an object
+              console.log(obj);
+            }});
             
             break; // user will only be in one game, so once we've found it we're done
           }
