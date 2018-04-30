@@ -97,7 +97,7 @@ app.get('/auth/test/callback', function(req, res) {
           if (err)
             console.log(err);
           else {
-            //req.session.result = data;
+            req.session.result = data;
             fantasyData["game_key"] = req.session.result.games[0].game_key;
           }
           //return res.redirect('/');
@@ -112,7 +112,7 @@ app.get('/auth/test/callback', function(req, res) {
           if (err)
             console.log(err);
           else {
-            //req.session.result = data;
+            req.session.result = data;
             fantasyData["league_name"] = req.session.result.leagues[0].leagues[0].name;
             fantasyData["num_teams"] = req.session.result.leagues[0].leagues[0].num_teams;
             fantasyData["league_key"] = req.session.result.leagues[0].leagues[0].league_key;
