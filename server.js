@@ -191,7 +191,7 @@ async function callRosterPlayers() {
     fantasyData.team_key, //fantasyData["team_key"], //"371.l.1075055.t.9", //
     function(err, data) {
       if (err) {
-        console.log("Error on yf.roster.players");
+        console.log("Error on yf.roster.players (4.)");
         console.log(err);
         console.log(fantasyData);
       } else {
@@ -224,7 +224,7 @@ async function callLeagueScoreboard() {
     15, // this is the last week that Camden had a game
     function(err, data) {
       if (err) {
-        console.log("Error on yf.league.scoreboard");
+        console.log("Error on yf.league.scoreboard (5.)");
         console.log(err);
         console.log(fantasyData);
       } else {
