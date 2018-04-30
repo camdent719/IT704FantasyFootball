@@ -108,16 +108,12 @@ app.get('/auth/test/callback', function(req, res) {
           var resultLeagueScoreboard = setTimeout(callLeagueScoreboard, 1000);*/
           
           req.session.result = await fantasyData;
-          
-          var ourData = JSON.stringify(fantasyData);
-          var file = require('file');
-          file.writeFile('sample.json', json, 'utf8', callback);
-          
           return await res.redirect('/');
         }
         asynchronousCalls();
       }
       
+          
       //console.log(fantasyData);
     }
   });
@@ -268,6 +264,11 @@ async function callLeagueScoreboard() {
             }
             fantasyData["matchup"] = matchup;
             console.log(fantasyData);
+            
+            var ourData = JSON.stringify(fantasyData);
+            var file = require('file');
+            file.writeFile('sample.json', ourData, 'utf8', callback);
+            
             break; // user will only be in one game, so once we've found it we're done
           }
         }
