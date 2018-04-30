@@ -98,7 +98,7 @@ app.get('/auth/test/callback', function(req, res) {
         console.log("this IS in fact fantasy football - 371");
         
         async function asynchronousCalls() {
-          var resultUserGameLeagues = await callUserGameLeagues();
+          var resultUserGameLeagues = callUserGameLeagues();
           var resultUserGameTeams = await callUserGameTeams();
           var resultRosterPlayers = await callRosterPlayers();
           var resultLeagueScoreboard = await callLeagueScoreboard();
