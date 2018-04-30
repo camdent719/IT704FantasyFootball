@@ -247,7 +247,6 @@ async function performLastTwoCalls() {
           }
         }
         
-        console.log("yf.league.scoreboard " + fantasyData);
         //req.session.result = fantasyData;
       }
       //return res.redirect('/');
