@@ -101,13 +101,13 @@ app.get('/auth/test/callback', function(req, res) {
             fantasyData["game_key"] = req.session.result.games[0].game_key;
           }
           //return res.redirect('/');
-          console.log("yf.user.games " + fantasyData);
+          //console.log("yf.user.games " + fantasyData);
         }
       );
       
       // using the game key, get league name, num teams in league, league key and league id
       yf.user.game_leagues(
-        "371", //fantasyData.game_key, 
+        fantasyData.game_key, // "371",
         function(err, data) {
           if (err)
             console.log(err);
@@ -125,7 +125,7 @@ app.get('/auth/test/callback', function(req, res) {
       
       // using the game key, get the user's team name, team key, and team id
       yf.user.game_teams(
-        "371", //fantasyData.game_key,
+        fantasyData.game_key, //"371", //
         function(err, data) {
           if (err)
             console.log(err);
