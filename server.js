@@ -91,6 +91,7 @@ app.get('/auth/test/callback', function(req, res) {
       req.session.token = accessToken;
       yf.setUserToken(accessToken);
       
+      var isGameFootball = true;
       // gets the game key
       yf.user.games(
         function(err, data) {
@@ -99,15 +100,24 @@ app.get('/auth/test/callback', function(req, res) {
           else {
             req.session.result = data;
             fantasyData["game_key"] = req.session.result.games[0].game_key;
+            if (fantasyData.game_key != 371)
+              isGameFootball = false;
           }
           //return res.redirect('/');
           //console.log("yf.user.games " + fantasyData);
         }
       );
       
+      if (!isGameFootball) {
+        req.session.result = "This game is not Fantasy Football.";
+        return;
+      } else {
+        console.log("this IS in fact fantasy football - 371");
+      }
+      
       // using the game key, get league name, num teams in league, league key and league id
       yf.user.game_leagues(
-        req.session.result.games[0].game_key, //fantasyData["game_key"], //fantasyData.game_key, // "371",  //req.session.result.games[0].game_key, 
+        "371", //fantasyData.game_key, //fantasyData["game_key"], 
         function(err, data) {
           if (err)
             console.log(err);
@@ -125,18 +135,15 @@ app.get('/auth/test/callback', function(req, res) {
       
       // using the game key, get the user's team name, team key, and team id
       yf.user.game_teams(
-        req.session.result.games[0].game_key, //fantasyData["game_key"], //"371", 
+        "371", //fantasyData.game_key, //fantasyData["game_key"], 
         function(err, data) {
           if (err)
             console.log(err);
           else {
             req.session.result = data;
-            //game_key = req.session.result.teams[0].game_key;
             fantasyData["team_name"] = req.session.result.teams[0].teams[0].name;
             fantasyData["team_key"] = req.session.result.teams[0].teams[0].team_key;
             fantasyData["team_id"] = req.session.result.teams[0].teams[0].team_id;
-            
-            //req.session.result = "Game key: " + game_key + "\nTeam key: " + team_key + "\nLeague_id: " + league_id;
           }
           //return res.redirect('/');
           //console.log("yf.user.game_teams " + fantasyData);
@@ -145,7 +152,7 @@ app.get('/auth/test/callback', function(req, res) {
       
       // using the team key, get player info
       yf.roster.players(
-        req.session.result.teams[0].teams[0].team_key, //fantasyData["team_key"], //"371.l.1075055.t.9", //
+        fantasyData.team_key, //fantasyData["team_key"], //"371.l.1075055.t.9", //
         function(err, data) {
           if (err) {
             console.log("Error on yf.roster.players");
@@ -165,14 +172,14 @@ app.get('/auth/test/callback', function(req, res) {
             
             req.session.result = fantasyData;
           }
-          console.log(fantasyData);
+          //console.log(fantasyData);
           //return res.redirect('/');
         }
       );
-      /*
+      
       // using the league key, get info about the current matchup (score, teams)
       yf.league.scoreboard(
-        fantasyData["league_key"], //"371.l.1075055", //
+        fantasyData.league_key, //fantasyData["league_key"], //"371.l.1075055", //
         15, // this is the last week that Camden had a game
         function(err, data) {
           if (err) {
@@ -217,7 +224,7 @@ app.get('/auth/test/callback', function(req, res) {
           }
           return res.redirect('/');
         }
-      );*/
+      );
       //console.log(fantasyData);
     }
   });
