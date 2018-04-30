@@ -126,8 +126,8 @@ async function callUserGames() {
         console.log(err);
       else {
         console.log("*** 1. user.games");
-        req.session.result = data;
-        fantasyData["game_key"] = req.session.result.games[0].game_key;
+        //req.session.result = data;
+        fantasyData["game_key"] = data.games[0].game_key;
         if (fantasyData.game_key != 371)
           return false;
       }
