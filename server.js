@@ -98,6 +98,7 @@ app.get('/auth/test/callback', function(req, res) {
           if (err)
             console.log(err);
           else {
+            console.log("*** 1. user.games");
             req.session.result = data;
             fantasyData["game_key"] = req.session.result.games[0].game_key;
             if (fantasyData.game_key != 371)
@@ -122,6 +123,7 @@ app.get('/auth/test/callback', function(req, res) {
           if (err)
             console.log(err);
           else {
+            console.log("*** 2. user.game_leagues");
             req.session.result = data;
             fantasyData["league_name"] = req.session.result.leagues[0].leagues[0].name;
             fantasyData["num_teams"] = req.session.result.leagues[0].leagues[0].num_teams;
@@ -140,6 +142,7 @@ app.get('/auth/test/callback', function(req, res) {
           if (err)
             console.log(err);
           else {
+            console.log("*** 3. user.game_teams");
             req.session.result = data;
             fantasyData["team_name"] = req.session.result.teams[0].teams[0].name;
             fantasyData["team_key"] = req.session.result.teams[0].teams[0].team_key;
@@ -159,6 +162,7 @@ app.get('/auth/test/callback', function(req, res) {
             console.log(err);
             console.log(fantasyData);
           } else {
+            console.log("*** 4. roster.players");
             req.session.result = data;
             var roster = [];
             for (player in req.session.result.roster) {
@@ -188,6 +192,7 @@ app.get('/auth/test/callback', function(req, res) {
             console.log(err);
             console.log(fantasyData);
           } else {
+            console.log("*** 5. league.scoreboard");
             req.session.result = data;
             
             for (game in req.session.result.scoreboard.matchups) {
