@@ -124,7 +124,7 @@ app.listen(app.get('port'), function() {
 
 async function callUserGames() {
   // gets the game key
-  yf.user.games(
+  await yf.user.games(
     function(err, data) {
       if (err)
         console.log(err);
