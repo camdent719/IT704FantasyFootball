@@ -92,6 +92,7 @@ app.get('/auth/test/callback', function(req, res) {
       yf.setUserToken(accessToken);
       
       var isGameFootball = true;
+      
       // gets the game key
       yf.user.games(
         function(err, data) {
@@ -114,45 +115,12 @@ app.get('/auth/test/callback', function(req, res) {
         return;
       } else {
         console.log("this IS in fact fantasy football - 371");
-        callMyTestFunction();
+        performNextTwoCalls(); //setTimeout(performNextTwoCalls, 1000);
       }
       
-      // using the game key, get league name, num teams in league, league key and league id
-      yf.user.game_leagues(
-        "371", //fantasyData.game_key, //fantasyData["game_key"], 
-        function(err, data) {
-          if (err)
-            console.log(err);
-          else {
-            console.log("*** 2. user.game_leagues");
-            req.session.result = data;
-            fantasyData["league_name"] = req.session.result.leagues[0].leagues[0].name;
-            fantasyData["num_teams"] = req.session.result.leagues[0].leagues[0].num_teams;
-            fantasyData["league_key"] = req.session.result.leagues[0].leagues[0].league_key;
-            fantasyData["league_id"] = req.session.result.leagues[0].leagues[0].league_id;
-          }
-          //return res.redirect('/');
-          //console.log("yf.user.game_leagues " + fantasyData);
-        }
-      );
       
-      // using the game key, get the user's team name, team key, and team id
-      yf.user.game_teams(
-        "371", //fantasyData.game_key, //fantasyData["game_key"], 
-        function(err, data) {
-          if (err)
-            console.log(err);
-          else {
-            console.log("*** 3. user.game_teams");
-            req.session.result = data;
-            fantasyData["team_name"] = req.session.result.teams[0].teams[0].name;
-            fantasyData["team_key"] = req.session.result.teams[0].teams[0].team_key;
-            fantasyData["team_id"] = req.session.result.teams[0].teams[0].team_id;
-          }
-          //return res.redirect('/');
-          //console.log("yf.user.game_teams " + fantasyData);
-        }
-      );
+      
+      
       
       // using the team key, get player info
       yf.roster.players(
@@ -242,6 +210,41 @@ app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-function callMyTestFunction() {
-  console.log("my test function worked!");
+function performNextTwoCalls() {
+  // using the game key, get league name, num teams in league, league key and league id
+  yf.user.game_leagues(
+    "371", //fantasyData.game_key, //fantasyData["game_key"], 
+    function(err, data) {
+      if (err)
+        console.log(err);
+      else {
+        console.log("*** 2. user.game_leagues");
+        req.session.result = data;
+        fantasyData["league_name"] = req.session.result.leagues[0].leagues[0].name;
+        fantasyData["num_teams"] = req.session.result.leagues[0].leagues[0].num_teams;
+        fantasyData["league_key"] = req.session.result.leagues[0].leagues[0].league_key;
+        fantasyData["league_id"] = req.session.result.leagues[0].leagues[0].league_id;
+      }
+      //return res.redirect('/');
+      //console.log("yf.user.game_leagues " + fantasyData);
+    }
+  );
+  
+  // using the game key, get the user's team name, team key, and team id
+  yf.user.game_teams(
+    "371", //fantasyData.game_key, //fantasyData["game_key"], 
+    function(err, data) {
+      if (err)
+        console.log(err);
+      else {
+        console.log("*** 3. user.game_teams");
+        req.session.result = data;
+        fantasyData["team_name"] = req.session.result.teams[0].teams[0].name;
+        fantasyData["team_key"] = req.session.result.teams[0].teams[0].team_key;
+        fantasyData["team_id"] = req.session.result.teams[0].teams[0].team_id;
+      }
+      //return res.redirect('/');
+      //console.log("yf.user.game_teams " + fantasyData);
+    }
+  );
 }
