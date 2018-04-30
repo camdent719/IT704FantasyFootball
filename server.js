@@ -101,7 +101,7 @@ app.get('/auth/test/callback', function(req, res) {
             fantasyData["game_key"] = req.session.result.games[0].game_key;
           }
           //return res.redirect('/');
-          //console.log("yf.user.games " + fantasyData);
+          console.log("yf.user.games " + fantasyData);
         }
       );
       
