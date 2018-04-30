@@ -136,9 +136,9 @@ app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-function performNextTwoCalls() {
+async function performNextTwoCalls() {
   // using the game key, get league name, num teams in league, league key and league id
-  yf.user.game_leagues(
+  await yf.user.game_leagues(
     "371", //fantasyData.game_key, //fantasyData["game_key"], 
     function(err, data) {
       if (err)
@@ -157,7 +157,7 @@ function performNextTwoCalls() {
   );
   
   // using the game key, get the user's team name, team key, and team id
-  yf.user.game_teams(
+  await yf.user.game_teams(
     "371", //fantasyData.game_key, //fantasyData["game_key"], 
     function(err, data) {
       if (err)
@@ -175,9 +175,9 @@ function performNextTwoCalls() {
   );
 }
 
-function performLastTwoCalls() {
+async function performLastTwoCalls() {
   // using the team key, get player info
-  yf.roster.players(
+  await yf.roster.players(
     fantasyData.team_key, //fantasyData["team_key"], //"371.l.1075055.t.9", //
     function(err, data) {
       if (err) {
@@ -206,7 +206,7 @@ function performLastTwoCalls() {
   );
   
   // using the league key, get info about the current matchup (score, teams)
-  yf.league.scoreboard(
+  await yf.league.scoreboard(
     fantasyData.league_key, //fantasyData["league_key"], //"371.l.1075055", //
     15, // this is the last week that Camden had a game
     function(err, data) {
