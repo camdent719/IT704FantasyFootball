@@ -1,4 +1,3 @@
-// confirmed to work with node version 5.10.1
 /**
  * Create conf.js like below
  *
@@ -115,8 +114,7 @@ app.get('/auth/test/callback', function(req, res) {
         return;
       } else {
         console.log("this IS in fact fantasy football - 371");
-        setTimeout(performNextTwoCalls, 1000);
-        setTimeout(performLastTwoCalls, 1000);
+        performNextTwoCalls().then(performLastTwoCalls());
         
         req.session.result = fantasyData;
         return res.redirect('/');
