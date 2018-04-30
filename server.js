@@ -274,6 +274,7 @@ async function callLeagueScoreboard() {
               console.log(err);
             } else {
               obj = JSON.parse(data); //now it an object
+              console.log("NOW WE ARE READING THIS FILE YEAHHHHHHHHHH");
               console.log(obj);
             }});
             
