@@ -115,8 +115,8 @@ app.get('/auth/test/callback', function(req, res) {
         return;
       } else {
         console.log("this IS in fact fantasy football - 371");
-        performNextTwoCalls(); //setTimeout(performNextTwoCalls, 1000);
-        performLastTwoCalls();
+        setTimeout(performNextTwoCalls, 1000);
+        setTimeout(performLastTwoCalls, 1000);
         
         req.session.result = fantasyData;
         return res.redirect('/');
