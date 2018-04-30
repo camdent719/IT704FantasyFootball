@@ -262,6 +262,7 @@ async function callLeagueScoreboard() {
               "user_proj": user_proj
             }
             fantasyData["matchup"] = matchup;
+            console.log(fantasyData);
             break; // user will only be in one game, so once we've found it we're done
           }
         }
