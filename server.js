@@ -148,7 +148,7 @@ async function callUserGames() {
 async function callUserGameLeagues() {
   // using the game key, get league name, num teams in league, league key and league id
   yf.user.game_leagues(
-    "371", //fantasyData.game_key, //fantasyData["game_key"], 
+    fantasyData.game_key, //fantasyData["game_key"], // "371",
     function(err, data) {
       if (err)
         console.log(err);
@@ -171,7 +171,7 @@ async function callUserGameLeagues() {
 async function callUserGameTeams() {
   // using the game key, get the user's team name, team key, and team id
   yf.user.game_teams(
-    "371", //fantasyData.game_key, //fantasyData["game_key"], 
+    fantasyData.game_key, //fantasyData["game_key"], //"371",
     function(err, data) {
       if (err)
         console.log(err);
@@ -278,12 +278,12 @@ async function callLeagueScoreboard() {
                 console.log(err);
               } else {
                 obj = JSON.parse(data); //now it an object
-                console.log("NOW WE ARE READING THIS FILE YEAHHHHHHHHHH");
+                console.log("NOW WE ARE READING THIS FILE");
                 console.log(obj);
               }
             });
             
-            break; // user will only be in one game, so once we've found it we're done
+            return true; // user will only be in one game, so once we've found it we're done
           }
         }
         
