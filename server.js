@@ -160,10 +160,11 @@ async function callUserGameLeagues() {
         fantasyData["league_key"] = data.leagues[0].leagues[0].league_key;
         fantasyData["league_id"] = data.leagues[0].leagues[0].league_id;
         callUserGameTeams();
+        return true;
       }
       //return res.redirect('/');
       //console.log("yf.user.game_leagues " + fantasyData);
-      return true;
+      //return true;
     }
   );
 }
@@ -182,10 +183,11 @@ async function callUserGameTeams() {
         fantasyData["team_key"] = data.teams[0].teams[0].team_key;
         fantasyData["team_id"] = data.teams[0].teams[0].team_id;
         callRosterPlayers();
+        return true;
       }
       //return res.redirect('/');
       //console.log("yf.user.game_teams " + fantasyData);
-      return true;
+      //return true;
     }
   );
 }
@@ -213,11 +215,12 @@ async function callRosterPlayers() {
         }
         fantasyData["roster"] = roster;
         callLeagueScoreboard();
+        return true;
         //req.session.result = fantasyData;
       }
       //console.log(fantasyData);
       //return res.redirect('/');
-      return true;
+      //return true;
     }
   );
 }
@@ -269,7 +272,7 @@ async function callLeagueScoreboard() {
             var file = require('fs');
             file.writeFile('sample.json', ourData, 'utf8', function(err) {
               if (err) throw err;
-                console.log('complete');
+              console.log('complete');
               }
             );
             
@@ -290,7 +293,7 @@ async function callLeagueScoreboard() {
         //req.session.result = fantasyData;
       }
       //return res.redirect('/');
-      return true;
+      //return true;
     }
   );
 }
