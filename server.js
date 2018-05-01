@@ -19,7 +19,7 @@ var clientId = require('./conf.js').clientId;
 var clientSecret = require('./conf.js').clientSecret;
 var redirectUri = require('./conf.js').redirectUri;
 
-var fantasyData = require('./global.js').fantasyData;
+var fantasyData = {};//require('./global.js').fantasyData;
 
 var yf = new YantasySports();
 
