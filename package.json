@@ -1,35 +1,17 @@
 {
-  "name": "yahoo-oauth2-test",
-  "version": "1.0.0",
-  "engines": {
-    "node": "8.0.0"
-  },
-  "main": "server.js",
-  "scripts": {
-    "client": "cd client",
-    "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail"
-  },
+  "name": "ffballit",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "body-parser": "^1.15.2",
-    "express": "^4.14.0",
-    "express-session": "^1.14.1",
-    "jade": "^1.11.0",
-    "request": "^2.75.0",
-    "yahoo-fantasy-without-auth": "^1.0.2"
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-scripts": "1.1.4
   },
-  "devDependencies": {
-    "concurrently": "^3.5.0"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/withsmilo/yfsapi-oauth2-sample-app.git"
-  },
-  "keywords": [
-    "node",
-    "heroku",
-    "yahooFantasy",
-    "yfsapi"
-  ],
-  "license": "MIT"
+  "proxy": "http://it704.herokuapp.com:43983"
 }
