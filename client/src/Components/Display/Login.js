@@ -2,15 +2,25 @@ import React, {Component, Fragment} from 'react'
 import { Typography, Button } from 'material-ui'
 
 export default class Login extends Component {
-  state = { data };
+  
+  state = {
+    response: ''
+  };
 
-  getYahooData() {
-    fetch('/auth/test')
-      //.then(res => res.json())
-      //.then(passwords => this.setState({ passwords }));
-        .then(res => res.json())
-        .then(data => this.setState({ data }));
+  componentDidMount() {
+    this.callApi()
+      .then(res => this.setState({ response: res.express }))
+      .catch(err => console.log(err));
   }
+
+  callApi = async () => {
+    const response = await fetch('/auth/test');
+    const body = await response.json();
+
+    if (response.status !== 200) throw Error(body.message);
+
+    return body;
+  };
 
   unsupported() {
     window.alert("This fantasy provider is not supported at this time.");
