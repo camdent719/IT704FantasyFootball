@@ -31,13 +31,15 @@ app.get('/', function(req, res) {
   var data;
   if (req.session.result) {
     data = JSON.stringify(req.session.result, null, 2); // gets string rep. of data
+    res.json(data)
   }
   
-  res.render('home', {
-    title: 'Home',
-    user: req.session.token,
-    data: data
-  });
+  //res.render('home', {
+  //  title: 'Home',
+  //  user: req.session.token,
+  //  data: data
+  //});
+  
 });
 
 app.get('/logout', function(req, res) {
