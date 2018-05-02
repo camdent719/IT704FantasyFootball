@@ -1,13 +1,14 @@
 {
   "name": "yahoo-oauth2-test",
   "version": "1.0.0",
-  "description": "NodeJS sample application for Yahoo OAuth 2.0 + yfsapi-without-auth",
   "engines": {
     "node": "8.0.0"
   },
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "client": "cd client",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -16,6 +17,9 @@
     "jade": "^1.11.0",
     "request": "^2.75.0",
     "yahoo-fantasy-without-auth": "^1.0.2"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0"
   },
   "repository": {
     "type": "git",
