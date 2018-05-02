@@ -6,7 +6,7 @@
   },
   "scripts": {
     "client": "cd client",
-    "server": "nodemon server.js",
+    "server": "node server.js",
     "dev": "concurrently --kill-others-on-fail"
   },
   "dependencies": {
@@ -15,7 +15,8 @@
     "express-session": "^1.14.1",
     "jade": "^1.11.0",
     "request": "^2.75.0",
-    "yahoo-fantasy-without-auth": "^1.0.2"
+    "yahoo-fantasy-without-auth": "^1.0.2",
+    "ejs": "~1.0.0"
   },
   "devDependencies": {
     "concurrently": "^3.5.0"
