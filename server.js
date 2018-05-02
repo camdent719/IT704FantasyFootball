@@ -29,17 +29,20 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.set('view engine', 'ejs'); // ************************************ might not work!
+
 app.get('/', function(req, res) {
   var data;
   if (req.session.result) {
     data = JSON.stringify(req.session.result, null, 2); // gets string rep. of data
   }
   
-  res.render('home', {
+  /*res.render('home', {
     title: 'Home',
     user: req.session.token,
     data: data
-  });
+  });*/
+  res.render('index');
 });
 
 app.get('/logout', function(req, res) {
