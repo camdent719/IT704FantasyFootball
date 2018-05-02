@@ -270,7 +270,7 @@ async function callLeagueScoreboard() {
               }
             );
             
-            /*file.readFile('sample.json', 'utf8', function readFileCallback(err, data){
+            file.readFile('sample.json', 'utf8', function readFileCallback(err, data){
               if (err){
                 console.log(err);
               } else {
@@ -278,7 +278,7 @@ async function callLeagueScoreboard() {
                 console.log("NOW WE ARE READING THIS FILE");
                 console.log(obj);
               }
-            });*/
+            });
             
             return true; // user will only be in one game, so once we've found it we're done
           }
