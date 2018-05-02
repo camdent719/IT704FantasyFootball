@@ -29,7 +29,7 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.set('view engine', 'ejs'); // ************************************ might not work!
+//app.set('view engine', 'ejs'); // ************************************ might not work!
 
 app.get('/', function(req, res) {
   var data;
@@ -42,7 +42,7 @@ app.get('/', function(req, res) {
     user: req.session.token,
     data: data
   });*/
-  res.render('index');
+  res.render('src/index');
 });
 
 app.get('/logout', function(req, res) {
