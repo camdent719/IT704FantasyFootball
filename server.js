@@ -40,7 +40,6 @@ app.get('/', function(req, res) {
     user: req.session.token,
     data: data
   });
-  
 });
 
 app.get('/logout', function(req, res) {
@@ -128,13 +127,10 @@ async function callUserGames() {
         console.log("*** 1. user.games");
         
         fantasyData["game_key"] = data.games[0].game_key;
-        var ourData = "";
         if (fantasyData.game_key != 371)
           return false;
-        else {
-          ourData = callUserGameLeagues();
-          req.session.result = ourData;
-        }
+        else
+          callUserGameLeagues();
       }
       //return res.redirect('/');
       //console.log("yf.user.games " + fantasyData);
@@ -157,8 +153,8 @@ async function callUserGameLeagues() {
         fantasyData["num_teams"] = data.leagues[0].leagues[0].num_teams;
         fantasyData["league_key"] = data.leagues[0].leagues[0].league_key;
         fantasyData["league_id"] = data.leagues[0].leagues[0].league_id;
-        var ourData = callUserGameTeams();
-        return ourData;
+        callUserGameTeams();
+        return true;
       }
       //return res.redirect('/');
       //console.log("yf.user.game_leagues " + fantasyData);
@@ -180,8 +176,8 @@ async function callUserGameTeams() {
         fantasyData["team_name"] = data.teams[0].teams[0].name;
         fantasyData["team_key"] = data.teams[0].teams[0].team_key;
         fantasyData["team_id"] = data.teams[0].teams[0].team_id;
-        var ourData = callRosterPlayers();
-        return ourData;
+        callRosterPlayers();
+        return true;
       }
       //return res.redirect('/');
       //console.log("yf.user.game_teams " + fantasyData);
@@ -212,8 +208,8 @@ async function callRosterPlayers() {
           roster.push(currPlayer);
         }
         fantasyData["roster"] = roster;
-        var ourData = callLeagueScoreboard();
-        return ourData;
+        callLeagueScoreboard();
+        return true;
         //req.session.result = fantasyData;
       }
       //console.log(fantasyData);
@@ -284,7 +280,7 @@ async function callLeagueScoreboard() {
               }
             });*/
             
-            return ourData; // user will only be in one game, so once we've found it we're done
+            return true; // user will only be in one game, so once we've found it we're done
           }
         }
         
