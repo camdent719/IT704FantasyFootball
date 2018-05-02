@@ -115,7 +115,7 @@ app.get('/auth/test/callback', function(req, res) {
 //app.listen(app.get('port'), function() {
 //  console.log('Express server listening on port ' + app.get('port'));
 //});
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4294;
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 async function callUserGames() {
