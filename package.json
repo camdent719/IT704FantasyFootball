@@ -4,7 +4,6 @@
   "engines": {
     "node": "8.0.0"
   },
-  "main": "server.js",
   "scripts": {
     "client": "cd client",
     "server": "nodemon server.js",
