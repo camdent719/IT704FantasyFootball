@@ -31,7 +31,6 @@ app.get('/', function(req, res) {
   var data;
   if (req.session.result) {
     data = JSON.stringify(req.session.result, null, 2); // gets string rep. of data
-    res.json(data)
   }
   
   //res.render('home', {
