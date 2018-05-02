@@ -14,6 +14,8 @@ var fantasyData = {}; // global variable where our fantasy data will be stored
 
 var yf = new YantasySports();
 
+console.log("*** server.js: yf obj made");
+
 var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
