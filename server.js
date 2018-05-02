@@ -35,11 +35,11 @@ app.get('/', function(req, res) {
     data = JSON.stringify(req.session.result, null, 2); // gets string rep. of data
   }
   
-  //res.render('home', {
-  //  title: 'Home',
-  //  user: req.session.token,
-  //  data: data
-  //});
+  res.render('home', {
+    title: 'Home',
+    user: req.session.token,
+    data: data
+  });
   
 });
 
