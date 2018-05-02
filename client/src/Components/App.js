@@ -56,20 +56,28 @@ export default class App extends Component {
 
 
   //For some reason, whether 'loggedIn' is false or true it returns the GameCards
-  render() {
+render() {
     var isLogged = this.state.loggedIn
     console.log(typeof isLogged)
     console.log(isLogged)
-    if ({isLogged}) {
-      return <Fragment>
-        <Header />
-        <GameCard />
-      </Fragment>
+    if ({
+            isLogged
+        }) {
+        return <Fragment >
+            <
+            Header / >
+            <
+            GameCard / >
+            <
+            /Fragment>
     } else {
-      return <Fragment>
-        <Header />
-        <Expanded />
-      </Fragment>
+        return <Fragment >
+            <
+            Header / >
+            <
+            Expanded / >
+            <
+            /Fragment>
     }
-  }
+}
 }
