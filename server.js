@@ -35,12 +35,11 @@ app.get('/', function(req, res) {
     data = JSON.stringify(req.session.result, null, 2); // gets string rep. of data
   }
   
-  /*res.render('home', {
+  res.render('home', {
     title: 'Home',
     user: req.session.token,
     data: data
-  });*/
-  res.send('src/index.js');
+  });
 });
 
 app.get('/logout', function(req, res) {
@@ -92,31 +91,21 @@ app.get('/auth/test/callback', function(req, res) {
         
         async function asynchronousCalls() {
           var resultUserGameLeagues = await callUserGameLeagues();
-          //var resultUserGameTeams = await callUserGameTeams();
-          //var resultRosterPlayers = await callRosterPlayers();
-          //var resultLeagueScoreboard = await callLeagueScoreboard();
-          /*var resultUserGameLeagues = setTimeout(callUserGameLeagues, 1000);
-          var resultUserGameTeams = setTimeout(callUserGameTeams, 1000);
-          var resultRosterPlayers = setTimeout(callRosterPlayers, 1000);
-          var resultLeagueScoreboard = setTimeout(callLeagueScoreboard, 1000);*/
           
           req.session.result = await fantasyData;
           return await res.redirect('/');
         }
         asynchronousCalls();
       }
-      
-          
-      //console.log(fantasyData);
     }
   });
 });
 
-//app.listen(app.get('port'), function() {
-//  console.log('Express server listening on port ' + app.get('port'));
-//});
-var port = process.env.PORT || 8080;
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(app.get('port'), function() {
+  console.log('Express server listening on port ' + app.get('port'));
+});
+//var port = process.env.PORT || 8080;
+//app.listen(port, () => console.log(`Listening on port ${port}`));
 
 async function callUserGames() {
   // gets the game key
@@ -133,8 +122,6 @@ async function callUserGames() {
         else
           callUserGameLeagues();
       }
-      //return res.redirect('/');
-      //console.log("yf.user.games " + fantasyData);
       
     }
   );
@@ -149,7 +136,7 @@ async function callUserGameLeagues() {
         console.log(err);
       else {
         console.log("*** 2. user.game_leagues");
-        //req.session.result = data;
+        
         fantasyData["league_name"] = data.leagues[0].leagues[0].name;
         fantasyData["num_teams"] = data.leagues[0].leagues[0].num_teams;
         fantasyData["league_key"] = data.leagues[0].leagues[0].league_key;
@@ -157,9 +144,6 @@ async function callUserGameLeagues() {
         callUserGameTeams();
         return true;
       }
-      //return res.redirect('/');
-      //console.log("yf.user.game_leagues " + fantasyData);
-      //return true;
     }
   );
 }
@@ -167,22 +151,19 @@ async function callUserGameLeagues() {
 async function callUserGameTeams() {
   // using the game key, get the user's team name, team key, and team id
   yf.user.game_teams(
-    fantasyData.game_key, //fantasyData["game_key"], //"371",
+    fantasyData.game_key,
     function(err, data) {
       if (err)
         console.log(err);
       else {
         console.log("*** 3. user.game_teams");
-        //req.session.result = data;
+      
         fantasyData["team_name"] = data.teams[0].teams[0].name;
         fantasyData["team_key"] = data.teams[0].teams[0].team_key;
         fantasyData["team_id"] = data.teams[0].teams[0].team_id;
         callRosterPlayers();
         return true;
       }
-      //return res.redirect('/');
-      //console.log("yf.user.game_teams " + fantasyData);
-      //return true;
     }
   );
 }
@@ -190,15 +171,14 @@ async function callUserGameTeams() {
 async function callRosterPlayers() {
   // using the team key, get player info
   yf.roster.players(
-    fantasyData.team_key, //fantasyData["team_key"], //"371.l.1075055.t.9", //
+    fantasyData.team_key,
     function(err, data) {
       if (err) {
         console.log("Error on yf.roster.players (4.)");
         console.log(err);
-        //console.log(fantasyData);
       } else {
         console.log("*** 4. roster.players");
-        //req.session.result = data;
+
         var roster = [];
         for (player in data.roster) {
           var currPlayer = {
@@ -211,11 +191,7 @@ async function callRosterPlayers() {
         fantasyData["roster"] = roster;
         callLeagueScoreboard();
         return true;
-        //req.session.result = fantasyData;
       }
-      //console.log(fantasyData);
-      //return res.redirect('/');
-      //return true;
     }
   );
 }
@@ -223,16 +199,14 @@ async function callRosterPlayers() {
 async function callLeagueScoreboard() {
   // using the league key, get info about the current matchup (score, teams)
   yf.league.scoreboard(
-    fantasyData.league_key, //fantasyData["league_key"], //"371.l.1075055", //
+    fantasyData.league_key,
     15, // this is the last week that Camden had a game
     function(err, data) {
       if (err) {
         console.log("Error on yf.league.scoreboard (5.)");
         console.log(err);
-        //console.log(fantasyData);
       } else {
         console.log("*** 5. league.scoreboard");
-        //req.session.result = data;
         
         for (game in data.scoreboard.matchups) {
           if (data.scoreboard.matchups[game].teams[0].team_key != fantasyData.team_key && 
@@ -261,7 +235,6 @@ async function callLeagueScoreboard() {
               "user_proj": user_proj
             }
             fantasyData["matchup"] = matchup;
-            //console.log(fantasyData);
             
             var ourData = JSON.stringify(fantasyData);
             var file = require('fs');
@@ -271,6 +244,7 @@ async function callLeagueScoreboard() {
               }
             );
             
+            // test that we successfully wrote the file by trying to read it back
             file.readFile('sample.json', 'utf8', function readFileCallback(err, data){
               if (err){
                 console.log(err);
@@ -285,10 +259,7 @@ async function callLeagueScoreboard() {
           }
         }
         
-        //req.session.result = fantasyData;
       }
-      //return res.redirect('/');
-      //return true;
     }
   );
 }
