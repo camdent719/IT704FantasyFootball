@@ -40,7 +40,7 @@ app.get('/', function(req, res) {
     user: req.session.token,
     data: data
   });*/
-  res.sendFile(__dirname + '/public/index.html');
+  res.sendFile('index.html');
 });
 
 app.get('/logout', function(req, res) {
